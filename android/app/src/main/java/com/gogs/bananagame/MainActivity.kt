@@ -39,6 +39,8 @@ class MainActivity : ComponentActivity() {
         AppSettings.init()
         Haptics.init(this)
         SoundManager.init(this)
+        // Test hook (adb): `--es GOGS_START_GAME <game id>` skips the splash and opens that game.
+        com.gogs.bananagame.ui.DebugLaunch.startGame = intent?.getStringExtra("GOGS_START_GAME")
         UpdateChecker.init(this, intent?.getStringExtra("GOGS_FAKE_STORE_VERSION"), intent?.getStringExtra("GOGS_FAKE_STORE_NOTES"))
 
         setContent {

@@ -316,10 +316,11 @@ fun FeedView(initialGameID: String?) {
     }
 
     val density = LocalDensity.current
-    val topInsetPx = WindowInsets.safeDrawing.getTop(density)
-    val bottomInsetPx = WindowInsets.safeDrawing.getBottom(density)
-    val topInset = with(density) { topInsetPx.toDp() }
-    val bottomInset = with(density) { bottomInsetPx.toDp() }
+    // iOS reads the insets from a GeometryReader that ignores the safe area, so they come through
+    // as zero and the page's floors (60pt top, 12pt bottom) do the work. Mirror that exactly: the
+    // floors clear a camera cutout, and the controls sit 16dp from the top like on iOS.
+    val topInset = 0.dp
+    val bottomInset = 0.dp
 
     // Pull-to-reshuffle state.
     val pullThresholdPx = with(density) { 130.dp.toPx() }

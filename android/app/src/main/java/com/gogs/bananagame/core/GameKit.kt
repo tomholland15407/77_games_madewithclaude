@@ -124,7 +124,7 @@ fun sz(w: Double, h: Double) = Size(w.toFloat(), h.toFloat())
  * [running] is true. Returns a frame counter state that a Canvas can read to redraw.
  */
 @Composable
-fun rememberFrameLoop(running: Boolean = true, maxDt: Double = 0.05, key: Any? = Unit, onFrame: (dt: Double) -> Unit): State<Long> {
+fun rememberFrameLoop(running: Boolean = true, maxDt: Double = 0.05, key: Any? = Unit, onFrame: (dt: Double) -> Unit = {}): State<Long> {
     val tick = remember { mutableLongStateOf(0L) }
     val cb = rememberUpdatedState(onFrame)
     LaunchedEffect(running, key) {

@@ -40,10 +40,14 @@ import com.gogs.bananagame.core.ts
 import com.gogs.bananagame.games.GameRegistry
 
 /** A quick banana splash, then the feed; on a cold launch it offers to return to the last game. */
+/** Test hook set from the launch intent (see MainActivity). */
+object DebugLaunch { var startGame: String? = null }
+
 @Composable
 fun RootView() {
-    var showSplash by rememberSaveable { mutableStateOf(true) }
-    var resumeID by rememberSaveable { mutableStateOf<String?>(null) }
+    val debugStart = remember { DebugLaunch.startGame }
+    var showSplash by rememberSaveable { mutableStateOf(debugStart == null) }
+    var resumeID by rememberSaveable { mutableStateOf(debugStart) }
     val lastGame = remember { AppSettings.lastGameID?.let { id -> GameRegistry.all.firstOrNull { it.id == id } } }
 
     LaunchedEffect(Unit) { UpdateChecker.checkAtLaunch() }
