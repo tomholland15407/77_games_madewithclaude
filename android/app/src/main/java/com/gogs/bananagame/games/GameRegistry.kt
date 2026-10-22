@@ -1,6 +1,8 @@
 package com.gogs.bananagame.games
 
 import com.gogs.bananagame.core.GameDefinition
+import com.gogs.bananagame.games.turboracer.TurboRacerGame
+import com.gogs.bananagame.games.statuemaze.StatueMazeGame
 import com.gogs.bananagame.games.colortrap.ColorTrapGame
 import com.gogs.bananagame.games.tankmaze.TankMazeGame
 import com.gogs.bananagame.games.pegsolitaire.PegSolitaireGame
@@ -16,6 +18,8 @@ object GameRegistry {
             MemoryGame.definition,
             TankMazeGame.definition,
             ColorTrapGame.definition,
+            StatueMazeGame.definition,
+            TurboRacerGame.definition,
         )
     }
 }
