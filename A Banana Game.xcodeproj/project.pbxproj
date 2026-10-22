@@ -6,8 +6,31 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		FD288EFD302D6F7300F6C094 /* GeometryDashGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD288EFC302D6F7300F6C094 /* GeometryDashGame.swift */; };
+		FD288EFF302D6FF300F6C094 /* ColorSwitchGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD288EFE302D6FF300F6C094 /* ColorSwitchGame.swift */; };
+		FD288F01302D70AA00F6C094 /* KnifeHitGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD288F00302D70AA00F6C094 /* KnifeHitGame.swift */; };
+		FD288F03302D711300F6C094 /* ColorBumpGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD288F02302D711300F6C094 /* ColorBumpGame.swift */; };
+		FD6EEC92302C0C01001B50E9 /* PixelFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6EEC91302C0C01001B50E9 /* PixelFX.swift */; };
+		FD6EEC94302C0E8A001B50E9 /* FlappyBananaGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6EEC93302C0E8A001B50E9 /* FlappyBananaGame.swift */; };
+		FD6EEC98302C0F41001B50E9 /* StackGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6EEC97302C0F41001B50E9 /* StackGame.swift */; };
+		FD6EEC9A302C0FD2001B50E9 /* FruitNinjaGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6EEC99302C0FD2001B50E9 /* FruitNinjaGame.swift */; };
+		FD6EEC9E302C10F9001B50E9 /* DoodleJumpGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6EEC9D302C10F9001B50E9 /* DoodleJumpGame.swift */; };
+		FD6EECA0302C1173001B50E9 /* JetpackBananaGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6EEC9F302C1173001B50E9 /* JetpackBananaGame.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		FD288EFC302D6F7300F6C094 /* GeometryDashGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryDashGame.swift; sourceTree = "<group>"; };
+		FD288EFE302D6FF300F6C094 /* ColorSwitchGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSwitchGame.swift; sourceTree = "<group>"; };
+		FD288F00302D70AA00F6C094 /* KnifeHitGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnifeHitGame.swift; sourceTree = "<group>"; };
+		FD288F02302D711300F6C094 /* ColorBumpGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorBumpGame.swift; sourceTree = "<group>"; };
 		FD32ADF53018EF4B005F6475 /* A Banana Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "A Banana Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD6EEC91302C0C01001B50E9 /* PixelFX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelFX.swift; sourceTree = "<group>"; };
+		FD6EEC93302C0E8A001B50E9 /* FlappyBananaGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlappyBananaGame.swift; sourceTree = "<group>"; };
+		FD6EEC97302C0F41001B50E9 /* StackGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackGame.swift; sourceTree = "<group>"; };
+		FD6EEC99302C0FD2001B50E9 /* FruitNinjaGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitNinjaGame.swift; sourceTree = "<group>"; };
+		FD6EEC9D302C10F9001B50E9 /* DoodleJumpGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoodleJumpGame.swift; sourceTree = "<group>"; };
+		FD6EEC9F302C1173001B50E9 /* JetpackBananaGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JetpackBananaGame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -47,6 +70,16 @@
 			children = (
 				FD32ADF73018EF4B005F6475 /* A Banana Game */,
 				FD32ADF63018EF4B005F6475 /* Products */,
+				FD6EEC91302C0C01001B50E9 /* PixelFX.swift */,
+				FD6EEC93302C0E8A001B50E9 /* FlappyBananaGame.swift */,
+				FD6EEC97302C0F41001B50E9 /* StackGame.swift */,
+				FD6EEC99302C0FD2001B50E9 /* FruitNinjaGame.swift */,
+				FD6EEC9D302C10F9001B50E9 /* DoodleJumpGame.swift */,
+				FD6EEC9F302C1173001B50E9 /* JetpackBananaGame.swift */,
+				FD288EFC302D6F7300F6C094 /* GeometryDashGame.swift */,
+				FD288EFE302D6FF300F6C094 /* ColorSwitchGame.swift */,
+				FD288F00302D70AA00F6C094 /* KnifeHitGame.swift */,
+				FD288F02302D711300F6C094 /* ColorBumpGame.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,6 +165,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD6EEC9E302C10F9001B50E9 /* DoodleJumpGame.swift in Sources */,
+				FD6EEC92302C0C01001B50E9 /* PixelFX.swift in Sources */,
+				FD6EECA0302C1173001B50E9 /* JetpackBananaGame.swift in Sources */,
+				FD288F03302D711300F6C094 /* ColorBumpGame.swift in Sources */,
+				FD288EFF302D6FF300F6C094 /* ColorSwitchGame.swift in Sources */,
+				FD288F01302D70AA00F6C094 /* KnifeHitGame.swift in Sources */,
+				FD288EFD302D6F7300F6C094 /* GeometryDashGame.swift in Sources */,
+				FD6EEC9A302C0FD2001B50E9 /* FruitNinjaGame.swift in Sources */,
+				FD6EEC98302C0F41001B50E9 /* StackGame.swift in Sources */,
+				FD6EEC94302C0E8A001B50E9 /* FlappyBananaGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,7 +191,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "A Banana Game/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -179,7 +221,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "A Banana Game/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
