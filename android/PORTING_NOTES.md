@@ -81,6 +81,7 @@ Status legend: done = rules, levels, art and demo ported.
 13. Spiral Galaxies (`spiral-galaxies`): done
 14. Pearl Chain (`masyu`): done
 15. Bottle Order (`bottle-order`): done
+16. Topple Block (`bloxorz`): done
 
 (Remaining games are listed as they are ported.)
 

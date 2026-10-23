@@ -1,6 +1,7 @@
 package com.gogs.bananagame.games
 
 import com.gogs.bananagame.core.GameDefinition
+import com.gogs.bananagame.games.toppleblock.ToppleBlockGame
 import com.gogs.bananagame.games.bottleorder.BottleOrderGame
 import com.gogs.bananagame.games.pearlchain.PearlChainGame
 import com.gogs.bananagame.games.spiralgalaxies.SpiralGalaxiesGame
@@ -36,6 +37,7 @@ object GameRegistry {
             SpiralGalaxiesGame.definition,
             PearlChainGame.definition,
             BottleOrderGame.definition,
+            ToppleBlockGame.definition,
         )
     }
 }
