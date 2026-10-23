@@ -84,6 +84,7 @@ Status legend: done = rules, levels, art and demo ported.
 16. Topple Block (`bloxorz`): done
 17. Line Connect (`line-connect`): done
 18. Groove Slider (`roll-the-ball`): done
+19. Berry Balance (`binairo`): done
 
 (Remaining games are listed as they are ported.)
 
