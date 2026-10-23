@@ -1,6 +1,7 @@
 package com.gogs.bananagame.games
 
 import com.gogs.bananagame.core.GameDefinition
+import com.gogs.bananagame.games.jungleloop.JungleLoopGame
 import com.gogs.bananagame.games.lawndefense.LawnDefenseGame
 import com.gogs.bananagame.games.critterduel.CritterDuelGame
 import com.gogs.bananagame.games.planecrash.PlaneCrashGame
@@ -62,6 +63,7 @@ object GameRegistry {
             PlaneCrashGame.definition,
             CritterDuelGame.definition,
             LawnDefenseGame.definition,
+            JungleLoopGame.definition,
         )
     }
 }

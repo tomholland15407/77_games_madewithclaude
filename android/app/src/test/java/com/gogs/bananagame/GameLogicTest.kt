@@ -6,6 +6,7 @@ import com.gogs.bananagame.games.critterduel.CDBattle
 import com.gogs.bananagame.games.critterduel.CDEvent
 import com.gogs.bananagame.games.critterduel.CDType
 import com.gogs.bananagame.games.critterduel.CritterDuelGame
+import com.gogs.bananagame.games.jungleloop.SLGen
 import com.gogs.bananagame.games.lawndefense.LDParams
 import com.gogs.bananagame.games.lawndefense.LDPlantKind
 import com.gogs.bananagame.games.lawndefense.LDWorld
@@ -144,5 +145,23 @@ class GameLogicTest {
         assertFalse(v.plant(LDPlantKind.SUNFLOWER, 2, 1))   // recharging
         assertFalse(v.plant(LDPlantKind.PEASHOOTER, 2, 0))  // tile taken
         assertEquals(125 - 50, v.sun)
+    }
+
+    @Test
+    fun jungleLoopPuzzlesHaveEnoughClues() {
+        for (level in 1..7) {
+            val n = intArrayOf(3, 4, 4, 5, 5, 6, 6)[level - 1]
+            val pz = SLGen.makePuzzle(n, doubleArrayOf(1.0, 0.85, 0.70, 0.60, 0.50, 0.45, 0.38)[level - 1])
+            assertEquals(n, pz.n)
+            assertTrue(pz.clues.sumOf { r -> r.count { (it ?: 0) > 0 } } >= 3)
+        }
+        // The demo board's loop is accepted by the win check.
+        val h = Array(4) { IntArray(3) }; val v = Array(3) { IntArray(4) }
+        for ((r, c) in listOf(0 to 0, 1 to 1, 2 to 2, 3 to 2, 3 to 1, 2 to 0)) h[r][c] = 1
+        for ((r, c) in listOf(0 to 1, 1 to 2, 2 to 3, 2 to 1, 1 to 0, 0 to 0)) v[r][c] = 1
+        val clues = listOf(listOf<Int?>(3, 2, 0), listOf<Int?>(2, 2, 2), listOf<Int?>(2, 2, 3))
+        assertTrue(SLGen.isSolved(3, clues, h, v))
+        h[0][0] = 0
+        assertFalse(SLGen.isSolved(3, clues, h, v))
     }
 }
