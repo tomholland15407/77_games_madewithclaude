@@ -2,6 +2,10 @@ package com.gogs.bananagame
 
 import com.gogs.bananagame.core.Bits128
 import com.gogs.bananagame.games.breach.BreachGen
+import com.gogs.bananagame.games.critterduel.CDBattle
+import com.gogs.bananagame.games.critterduel.CDEvent
+import com.gogs.bananagame.games.critterduel.CDType
+import com.gogs.bananagame.games.critterduel.CritterDuelGame
 import com.gogs.bananagame.games.pearlchain.MasyuGen
 import com.gogs.bananagame.games.pegsolitaire.PCell
 import com.gogs.bananagame.games.pegsolitaire.PegSolitaireGame
@@ -94,5 +98,24 @@ class GameLogicTest {
             val room = StatueSolver.makePuzzle(StatueMazeGame.params(level))
             assertNotNull(StatueSolver.pushRuns(room))
         }
+    }
+
+    @Test
+    fun critterDuelTypesAndDemoSeed() {
+        assertEquals(2.0, CDType.GRASS.against(CDType.WATER), 0.0)
+        assertEquals(0.5, CDType.FIRE.against(CDType.WATER), 0.0)
+        assertEquals(1.0, CDType.NORMAL.against(CDType.FIRE), 0.0)
+        // The manual demo: two Leaf Cuts (move 0) knock out the level-1 rival on the fixed seed.
+        val b = CDBattle.level(1, CritterDuelGame.DEMO_SEED)
+        var turns = 0
+        while (!b.won && !b.lost && turns < 10) { b.turn(0); turns++ }
+        assertTrue(b.won)
+        assertEquals(2, turns)
+        // Every level builds the right number of rivals; L7 always ends on the boss.
+        for (level in 1..7) {
+            val bl = CDBattle.level(level, 12345uL + level.toULong())
+            assertEquals(intArrayOf(1, 1, 2, 2, 2, 3, 3)[level - 1], bl.foes.size)
+        }
+        assertEquals("Pepperoar", CDBattle.level(7, 99uL).foes.last().name)
     }
 }

@@ -1,6 +1,7 @@
 package com.gogs.bananagame.games
 
 import com.gogs.bananagame.core.GameDefinition
+import com.gogs.bananagame.games.critterduel.CritterDuelGame
 import com.gogs.bananagame.games.planecrash.PlaneCrashGame
 import com.gogs.bananagame.games.ledgebrawl.LedgeBrawlGame
 import com.gogs.bananagame.games.colortide.ColorTideGame
@@ -58,6 +59,7 @@ object GameRegistry {
             ColorTideGame.definition,
             LedgeBrawlGame.definition,
             PlaneCrashGame.definition,
+            CritterDuelGame.definition,
         )
     }
 }

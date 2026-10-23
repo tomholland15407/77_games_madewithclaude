@@ -13,6 +13,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
@@ -100,4 +102,16 @@ fun HoldKey(
         modifier.then(if (enabled) Modifier.pressDown(onDown = { held = true; onDown() }, onUp = { held = false; onUp() }) else Modifier),
         contentAlignment = androidx.compose.ui.Alignment.Center
     ) { content(held) }
+}
+
+/**
+ * SwiftUI `.frame(width:).position(x:y:)` inside a full-size Box: fills the parent and places the
+ * child centred at (fx, fy) fractions of it, optionally forcing its width to `widthFrac` of it.
+ */
+fun Modifier.centerAt(fx: Double, fy: Double, widthFrac: Double? = null): Modifier = this.layout { m, c ->
+    val cw = if (c.hasBoundedWidth) c.maxWidth else 0
+    val ch = if (c.hasBoundedHeight) c.maxHeight else 0
+    val inner = if (widthFrac != null) Constraints.fixedWidth((cw * widthFrac).toInt().coerceAtLeast(0)) else Constraints()
+    val p = m.measure(inner)
+    layout(cw, ch) { p.place((cw * fx - p.width / 2.0).toInt(), (ch * fy - p.height / 2.0).toInt()) }
 }
