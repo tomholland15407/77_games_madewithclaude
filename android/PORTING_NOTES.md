@@ -86,6 +86,7 @@ Status legend: done = rules, levels, art and demo ported.
 18. Groove Slider (`roll-the-ball`): done
 19. Berry Balance (`binairo`): done
 20. Lagoon Islands (`nurikabe`): done
+21. Air Hockey (`air-hockey`): done
 
 (Remaining games are listed as they are ported.)
 
