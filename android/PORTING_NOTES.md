@@ -78,6 +78,7 @@ Status legend: done = rules, levels, art and demo ported.
 10. Nugget Hook (`gold-miner`): done
 11. Breach (`breach`): done
 12. Compound Dash (`cover-fire`): done
+13. Spiral Galaxies (`spiral-galaxies`): done
 
 (Remaining games are listed as they are ported.)
 

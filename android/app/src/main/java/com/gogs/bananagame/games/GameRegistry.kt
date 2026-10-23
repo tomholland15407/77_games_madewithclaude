@@ -1,6 +1,7 @@
 package com.gogs.bananagame.games
 
 import com.gogs.bananagame.core.GameDefinition
+import com.gogs.bananagame.games.spiralgalaxies.SpiralGalaxiesGame
 import com.gogs.bananagame.games.compounddash.CompoundDashGame
 import com.gogs.bananagame.games.breach.BreachGame
 import com.gogs.bananagame.games.nuggethook.NuggetHookGame
@@ -30,6 +31,7 @@ object GameRegistry {
             NuggetHookGame.definition,
             BreachGame.definition,
             CompoundDashGame.definition,
+            SpiralGalaxiesGame.definition,
         )
     }
 }

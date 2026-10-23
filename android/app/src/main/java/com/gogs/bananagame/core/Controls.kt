@@ -55,6 +55,11 @@ fun Modifier.tapAt(key: Any? = Unit, onTap: (P) -> Unit): Modifier = pointerInpu
     detectTapGestures { onTap(it.p()) }
 }
 
+/** A tap that reports its position plus the tapped area's size in px (w, h). */
+fun Modifier.tapIn(key: Any? = Unit, onTap: (p: P, w: Double, h: Double) -> Unit): Modifier = pointerInput(key) {
+    detectTapGestures { onTap(it.p(), size.width.toDouble(), size.height.toDouble()) }
+}
+
 /** Fires on touch-down (no waiting for release) — for arcade buttons that should feel instant. */
 fun Modifier.pressDown(key: Any? = Unit, onDown: () -> Unit, onUp: () -> Unit = {}): Modifier = pointerInput(key) {
     awaitEachGesture {
