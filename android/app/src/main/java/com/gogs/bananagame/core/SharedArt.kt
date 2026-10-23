@@ -68,7 +68,7 @@ inline fun DrawScope.withAlpha(alpha: Double, block: DrawScope.() -> Unit) {
     if (alpha <= 0.0) return
     if (alpha >= 1.0) { block(); return }
     drawIntoCanvas { c ->
-        c.saveLayer(Rect(Offset.Zero, size), Paint().apply { this.alpha = alpha.toFloat() })
+        c.saveLayer(Rect(-20000f, -20000f, 20000f, 20000f), Paint().apply { this.alpha = alpha.toFloat() })
         block()
         c.restore()
     }
