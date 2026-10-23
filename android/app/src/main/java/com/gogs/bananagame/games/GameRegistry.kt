@@ -1,6 +1,7 @@
 package com.gogs.bananagame.games
 
 import com.gogs.bananagame.core.GameDefinition
+import com.gogs.bananagame.games.bottleorder.BottleOrderGame
 import com.gogs.bananagame.games.pearlchain.PearlChainGame
 import com.gogs.bananagame.games.spiralgalaxies.SpiralGalaxiesGame
 import com.gogs.bananagame.games.compounddash.CompoundDashGame
@@ -34,6 +35,7 @@ object GameRegistry {
             CompoundDashGame.definition,
             SpiralGalaxiesGame.definition,
             PearlChainGame.definition,
+            BottleOrderGame.definition,
         )
     }
 }
