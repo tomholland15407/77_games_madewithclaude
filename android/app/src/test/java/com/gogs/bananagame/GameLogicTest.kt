@@ -6,6 +6,10 @@ import com.gogs.bananagame.games.critterduel.CDBattle
 import com.gogs.bananagame.games.critterduel.CDEvent
 import com.gogs.bananagame.games.critterduel.CDType
 import com.gogs.bananagame.games.critterduel.CritterDuelGame
+import com.gogs.bananagame.games.lawndefense.LDParams
+import com.gogs.bananagame.games.lawndefense.LDPlantKind
+import com.gogs.bananagame.games.lawndefense.LDWorld
+import com.gogs.bananagame.games.lawndefense.LDZombieKind
 import com.gogs.bananagame.games.pearlchain.MasyuGen
 import com.gogs.bananagame.games.pegsolitaire.PCell
 import com.gogs.bananagame.games.pegsolitaire.PegSolitaireGame
@@ -117,5 +121,28 @@ class GameLogicTest {
             assertEquals(intArrayOf(1, 1, 2, 2, 2, 3, 3)[level - 1], bl.foes.size)
         }
         assertEquals("Pepperoar", CDBattle.level(7, 99uL).foes.last().name)
+    }
+
+    @Test
+    fun lawnDefenseHordeAndUndefendedLawnFalls() {
+        for (level in 1..7) {
+            val p = LDParams.level(level)
+            val w = LDWorld(p, 42uL + level.toULong())
+            assertEquals(p.count, w.schedule.size)
+            val rush = minOf(p.finalWave, p.count)
+            assertEquals(LDZombieKind.FLAG, w.schedule[p.count - rush].kind)
+            assertTrue(w.schedule.zipWithNext().all { (a, b) -> a.t <= b.t })
+        }
+        // Nobody planting: the mowers go, then a zombie reaches the house.
+        val w = LDWorld(LDParams.level(1), 9uL)
+        var steps = 0
+        while (!w.lost && !w.won && steps < 60 * 400) { w.step(1.0 / 60); steps++ }
+        assertTrue(w.lost)
+        // Planting rules: cost, recharge and one plant per tile.
+        val v = LDWorld(LDParams.level(1), 3uL)
+        assertTrue(v.plant(LDPlantKind.SUNFLOWER, 2, 0))
+        assertFalse(v.plant(LDPlantKind.SUNFLOWER, 2, 1))   // recharging
+        assertFalse(v.plant(LDPlantKind.PEASHOOTER, 2, 0))  // tile taken
+        assertEquals(125 - 50, v.sun)
     }
 }

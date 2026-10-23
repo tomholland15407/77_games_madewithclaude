@@ -93,6 +93,7 @@ Status legend: done = rules, levels, art and demo ported.
 25. Ledge Brawl (`gun-mayhem`): done
 26. Plane Crash (`plane-crash`): done
 27. Critter Duel (`critter-duel`): done (battle rules + SplitMix RNG ported bit-for-bit; demo seed unit-tested)
+28. Lawn Defense (`lawn-defense`): done (LDWorld sim ported 1:1 incl. SplitMix RNG; all 7 worlds, 10 plants, 7 bosses)
 
 (Remaining games are listed as they are ported.)
 
