@@ -90,6 +90,7 @@ Status legend: done = rules, levels, art and demo ported.
 22. Free the Banana (`klotski`): done
 23. Quick Draw (`quick-draw`): done
 24. Color Tide (`flood-it`): done
+25. Ledge Brawl (`gun-mayhem`): done
 
 (Remaining games are listed as they are ported.)
 
