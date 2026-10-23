@@ -91,6 +91,7 @@ Status legend: done = rules, levels, art and demo ported.
 23. Quick Draw (`quick-draw`): done
 24. Color Tide (`flood-it`): done
 25. Ledge Brawl (`gun-mayhem`): done
+26. Plane Crash (`plane-crash`): done
 
 (Remaining games are listed as they are ported.)
 
