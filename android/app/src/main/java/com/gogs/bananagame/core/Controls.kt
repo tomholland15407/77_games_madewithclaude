@@ -10,6 +10,7 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.PointerInputChange
@@ -75,4 +76,23 @@ fun rememberPressed(): Pair<MutableInteractionSource, State<Boolean>> {
     val src = remember { MutableInteractionSource() }
     val pressed = src.collectIsPressedAsState()
     return src to pressed
+}
+
+/**
+ * A press-and-hold key (SwiftUI `DragGesture(minimumDistance: 0)` onChanged/onEnded on a label):
+ * [onDown] fires on touch, [onUp] on release; [content] receives whether it is held.
+ */
+@Composable
+fun HoldKey(
+    modifier: androidx.compose.ui.Modifier,
+    enabled: Boolean = true,
+    onDown: () -> Unit,
+    onUp: () -> Unit = {},
+    content: @Composable androidx.compose.foundation.layout.BoxScope.(held: Boolean) -> Unit,
+) {
+    var held by androidx.compose.runtime.remember { androidx.compose.runtime.mutableStateOf(false) }
+    androidx.compose.foundation.layout.Box(
+        modifier.then(if (enabled) Modifier.pressDown(onDown = { held = true; onDown() }, onUp = { held = false; onUp() }) else Modifier),
+        contentAlignment = androidx.compose.ui.Alignment.Center
+    ) { content(held) }
 }

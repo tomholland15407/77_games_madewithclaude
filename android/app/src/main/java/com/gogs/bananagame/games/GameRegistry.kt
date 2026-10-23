@@ -1,6 +1,7 @@
 package com.gogs.bananagame.games
 
 import com.gogs.bananagame.core.GameDefinition
+import com.gogs.bananagame.games.compounddash.CompoundDashGame
 import com.gogs.bananagame.games.breach.BreachGame
 import com.gogs.bananagame.games.nuggethook.NuggetHookGame
 import com.gogs.bananagame.games.cupshuffle.CupShuffleGame
@@ -28,6 +29,7 @@ object GameRegistry {
             CupShuffleGame.definition,
             NuggetHookGame.definition,
             BreachGame.definition,
+            CompoundDashGame.definition,
         )
     }
 }

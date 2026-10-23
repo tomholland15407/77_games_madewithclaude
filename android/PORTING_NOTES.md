@@ -77,6 +77,7 @@ Status legend: done = rules, levels, art and demo ported.
 9. Cup Shuffle (`cup-shuffle`): done
 10. Nugget Hook (`gold-miner`): done
 11. Breach (`breach`): done
+12. Compound Dash (`cover-fire`): done
 
 (Remaining games are listed as they are ported.)
 
