@@ -79,6 +79,7 @@ Status legend: done = rules, levels, art and demo ported.
 11. Breach (`breach`): done
 12. Compound Dash (`cover-fire`): done
 13. Spiral Galaxies (`spiral-galaxies`): done
+14. Pearl Chain (`masyu`): done
 
 (Remaining games are listed as they are ported.)
 
