@@ -82,6 +82,7 @@ Status legend: done = rules, levels, art and demo ported.
 14. Pearl Chain (`masyu`): done
 15. Bottle Order (`bottle-order`): done
 16. Topple Block (`bloxorz`): done
+17. Line Connect (`line-connect`): done
 
 (Remaining games are listed as they are ported.)
 
