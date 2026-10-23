@@ -38,6 +38,7 @@ class MainActivity : ComponentActivity() {
         StatsStore.init()
         AppSettings.init()
         Haptics.init(this)
+        com.gogs.bananagame.games.freethebanana.FreeTheBananaGame.prewarm()
         SoundManager.init(this)
         // Test hook (adb): `--es GOGS_START_GAME <game id>` skips the splash and opens that game.
         com.gogs.bananagame.ui.DebugLaunch.startGame = intent?.getStringExtra("GOGS_START_GAME")

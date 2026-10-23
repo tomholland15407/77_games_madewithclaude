@@ -1,6 +1,7 @@
 package com.gogs.bananagame.games
 
 import com.gogs.bananagame.core.GameDefinition
+import com.gogs.bananagame.games.freethebanana.FreeTheBananaGame
 import com.gogs.bananagame.games.airhockey.AirHockeyGame
 import com.gogs.bananagame.games.lagoonislands.LagoonIslandsGame
 import com.gogs.bananagame.games.berrybalance.BerryBalanceGame
@@ -48,6 +49,7 @@ object GameRegistry {
             BerryBalanceGame.definition,
             LagoonIslandsGame.definition,
             AirHockeyGame.definition,
+            FreeTheBananaGame.definition,
         )
     }
 }

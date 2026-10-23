@@ -87,6 +87,7 @@ Status legend: done = rules, levels, art and demo ported.
 19. Berry Balance (`binairo`): done
 20. Lagoon Islands (`nurikabe`): done
 21. Air Hockey (`air-hockey`): done
+22. Free the Banana (`klotski`): done
 
 (Remaining games are listed as they are ported.)
 

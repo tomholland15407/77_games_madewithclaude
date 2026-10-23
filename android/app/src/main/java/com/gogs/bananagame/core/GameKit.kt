@@ -91,6 +91,9 @@ fun rndBool() = Random.nextBoolean()
 fun chance(p: Double) = Random.nextDouble() < p
 fun <T> List<T>.pick(): T = this[Random.nextInt(size)]
 
+/** Swift's `.rounded()` (schoolbook: halves away from zero). */
+fun Double.roundAway(): Int = if (this >= 0) kotlin.math.floor(this + 0.5).toInt() else -kotlin.math.floor(-this + 0.5).toInt()
+
 fun clamp(v: Double, lo: Double, hi: Double) = if (v < lo) lo else if (v > hi) hi else v
 fun clampI(v: Int, lo: Int, hi: Int) = if (v < lo) lo else if (v > hi) hi else v
 fun lerp(a: Double, b: Double, t: Double) = a + (b - a) * t
