@@ -1,6 +1,7 @@
 package com.gogs.bananagame.games
 
 import com.gogs.bananagame.core.GameDefinition
+import com.gogs.bananagame.games.lagoonislands.LagoonIslandsGame
 import com.gogs.bananagame.games.berrybalance.BerryBalanceGame
 import com.gogs.bananagame.games.grooveslider.GrooveSliderGame
 import com.gogs.bananagame.games.lineconnect.LineConnectGame
@@ -44,6 +45,7 @@ object GameRegistry {
             LineConnectGame.definition,
             GrooveSliderGame.definition,
             BerryBalanceGame.definition,
+            LagoonIslandsGame.definition,
         )
     }
 }
