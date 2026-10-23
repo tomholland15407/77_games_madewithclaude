@@ -14,6 +14,15 @@ fun hash01(i: Int): Double {
     return v - floor(v)
 }
 
+/** The demo "tap" ring (iOS DemoTapRipple): a 26 pt ring growing ×0.7→×3.6 and fading over 0.55 s. */
+fun DrawScope.tapRipple(x: Double, y: Double, t: Double) {
+    if (t < 0 || t > 0.55) return
+    val k = t / 0.55
+    val e = 1 - (1 - k) * (1 - k)
+    val r = 13.0 * density * (0.7 + (3.6 - 0.7) * e)
+    circleStroke(x, y, r, androidx.compose.ui.graphics.Color.White.op(0.85 * (1 - e)), 3.0 * density)
+}
+
 /**
  * A fire-and-forget burst of tiny squares (PixelFX `ParticleBurstView`): squares fly out over
  * 0.5 s with an ease-out, fall by `gravity` points and fade. Driven by elapsed time `t` so it can

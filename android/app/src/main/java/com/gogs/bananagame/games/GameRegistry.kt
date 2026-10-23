@@ -1,6 +1,10 @@
 package com.gogs.bananagame.games
 
 import com.gogs.bananagame.core.GameDefinition
+import com.gogs.bananagame.games.breach.BreachGame
+import com.gogs.bananagame.games.nuggethook.NuggetHookGame
+import com.gogs.bananagame.games.cupshuffle.CupShuffleGame
+import com.gogs.bananagame.games.slide2048.Slide2048Game
 import com.gogs.bananagame.games.turboracer.TurboRacerGame
 import com.gogs.bananagame.games.statuemaze.StatueMazeGame
 import com.gogs.bananagame.games.colortrap.ColorTrapGame
@@ -20,6 +24,10 @@ object GameRegistry {
             ColorTrapGame.definition,
             StatueMazeGame.definition,
             TurboRacerGame.definition,
+            Slide2048Game.definition,
+            CupShuffleGame.definition,
+            NuggetHookGame.definition,
+            BreachGame.definition,
         )
     }
 }
