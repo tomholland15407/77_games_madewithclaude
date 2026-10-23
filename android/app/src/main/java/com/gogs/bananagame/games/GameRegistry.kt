@@ -1,6 +1,7 @@
 package com.gogs.bananagame.games
 
 import com.gogs.bananagame.core.GameDefinition
+import com.gogs.bananagame.games.grooveslider.GrooveSliderGame
 import com.gogs.bananagame.games.lineconnect.LineConnectGame
 import com.gogs.bananagame.games.toppleblock.ToppleBlockGame
 import com.gogs.bananagame.games.bottleorder.BottleOrderGame
@@ -40,6 +41,7 @@ object GameRegistry {
             BottleOrderGame.definition,
             ToppleBlockGame.definition,
             LineConnectGame.definition,
+            GrooveSliderGame.definition,
         )
     }
 }
