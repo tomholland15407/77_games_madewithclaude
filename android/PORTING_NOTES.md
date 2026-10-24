@@ -117,6 +117,8 @@ Status legend: done = rules, levels, art and demo ported.
 48. Prism Pass (`color-switch`): done
 49. Log Darts (`knife-hit`): done
 50. Rainbow Roll (`color-bump`): done
+51. Bridges (`hashi-bridges`): done — archipelago art (sea swells, sandy palm islands, plank bridges with rope rails), same web generator via BoardCache prefetch, crossing check, connectivity win, scripted demo.
+52. Tents & Trees (`tents-trees`): done — Frozax-style campsite card, same solved-first generator via BoardCache prefetch, perfect-matching win check, deduction demo; grid drawn in one Canvas and hit-tested with the iOS cell geometry.
 
 (Remaining games are listed as they are ported.)
 

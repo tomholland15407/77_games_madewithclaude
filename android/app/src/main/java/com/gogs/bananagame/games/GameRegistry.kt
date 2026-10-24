@@ -51,6 +51,8 @@ import com.gogs.bananagame.games.squaresprint.SquareSprintGame
 import com.gogs.bananagame.games.prismpass.PrismPassGame
 import com.gogs.bananagame.games.logdarts.LogDartsGame
 import com.gogs.bananagame.games.rainbowroll.RainbowRollGame
+import com.gogs.bananagame.games.bridges.BridgesGame
+import com.gogs.bananagame.games.tentstrees.TentsTreesGame
 
 /** The master list of games shown in the feed, in the iOS `GameRegistry.all` order. */
 object GameRegistry {
@@ -106,6 +108,8 @@ object GameRegistry {
             PrismPassGame.definition,
             LogDartsGame.definition,
             RainbowRollGame.definition,
+            BridgesGame.definition,
+            TentsTreesGame.definition,
         )
     }
 }
