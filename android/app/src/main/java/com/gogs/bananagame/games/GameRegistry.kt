@@ -60,6 +60,7 @@ import com.gogs.bananagame.games.tunnelpump.TunnelPumpGame
 import com.gogs.bananagame.games.pyramidhop.PyramidHopGame
 import com.gogs.bananagame.games.slidebots.SlideBotsGame
 import com.gogs.bananagame.games.decoy.DecoyGame
+import com.gogs.bananagame.games.mirrormaze.MirrorMazeGame
 
 /** The master list of games shown in the feed, in the iOS `GameRegistry.all` order. */
 object GameRegistry {
@@ -124,6 +125,7 @@ object GameRegistry {
             PyramidHopGame.definition,
             SlideBotsGame.definition,
             DecoyGame.definition,
+            MirrorMazeGame.definition,
         )
     }
 }

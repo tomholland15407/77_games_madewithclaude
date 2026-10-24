@@ -2,6 +2,17 @@ package com.gogs.bananagame
 
 import com.gogs.bananagame.core.Bits128
 import com.gogs.bananagame.games.breach.BreachGen
+import com.gogs.bananagame.games.bridges.BridgesGame
+import com.gogs.bananagame.games.bridges.HashiGen
+import com.gogs.bananagame.games.cratepush.CrateGen
+import com.gogs.bananagame.games.cratepush.CratePushGame
+import com.gogs.bananagame.games.mirrormaze.MMGen
+import com.gogs.bananagame.games.mirrormaze.MMSource
+import com.gogs.bananagame.games.mirrormaze.MirrorMazeGame
+import com.gogs.bananagame.games.slidebots.RRGen
+import com.gogs.bananagame.games.slidebots.SlideBotsGame
+import com.gogs.bananagame.games.tentstrees.TentsGen
+import com.gogs.bananagame.games.tentstrees.TentsTreesGame
 import com.gogs.bananagame.games.critterduel.CDBattle
 import com.gogs.bananagame.games.critterduel.CDEvent
 import com.gogs.bananagame.games.critterduel.CDType
@@ -163,5 +174,53 @@ class GameLogicTest {
         assertTrue(SLGen.isSolved(3, clues, h, v))
         h[0][0] = 0
         assertFalse(SLGen.isSolved(3, clues, h, v))
+    }
+
+    @Test
+    fun hashiAndTentsBoardsAreWellFormed() {
+        for (level in 1..7) {
+            val target = BridgesGame.targetIslands(level)
+            val p = HashiGen.make(BridgesGame.gridSize(level), target)
+            assertTrue(p.islands.size >= 3)
+            assertTrue(p.islands.all { it.need in 1..8 })
+            assertEquals(0, p.islands.sumOf { it.need } % 2)   // every bridge has two ends
+            val t = TentsGen.generate(TentsTreesGame.n(level), TentsTreesGame.tentTarget(level))
+            assertEquals(t.rowCounts.sum(), t.trees.size)
+            assertEquals(t.colCounts.sum(), t.trees.size)
+        }
+    }
+
+    @Test
+    fun crateAndSlideBotBoardsAreSolvable() {
+        assertEquals(4, CrateGen.solvePushes(CrateGen.demoPuzzle))
+        for (level in 1..4) assertNotNull(CrateGen.solvePushes(CrateGen.makePuzzle(CratePushGame.params(level))))
+        // Slide Bots demo: optimum 3, and the banana robot alone can never reach the ring.
+        val w = HashSet<Int>()
+        for ((r, c, d) in listOf(Triple(2, 0, 2), Triple(3, 2, 2), Triple(3, 4, 2), Triple(3, 5, 1), Triple(5, 2, 1))) RRGen.addWall(w, r, c, d, 6)
+        assertEquals(3, RRGen.optimalMoves(listOf(2, 18), 22, w, 6, 100_000))
+        assertEquals(null, RRGen.optimalMoves(listOf(2), 22, w, 6, 100_000))
+        val b = SlideBotsGame.gen(2)
+        val opt = RRGen.optimalMoves(b.robots, b.targetCell, b.walls, b.n, 120_000)
+        assertNotNull(opt); assertTrue(opt!! in 1..6)
+    }
+
+    @Test
+    fun mirrorMazeDemoOpensAfterTheTaps() {
+        val cols = 11; val rows = 15
+        val walls = BooleanArray(rows * cols)
+        for (r in 0 until rows) { walls[r * cols] = true; walls[r * cols + cols - 1] = true }
+        for (c in 0 until cols) { walls[c] = true; walls[(rows - 1) * cols + c] = true }
+        val srcs = listOf(MMSource(9 * cols + 10, -1, 0), MMSource(11 * cols + 10, -1, 0), MMSource(7, 0, 1))
+        val orient = hashMapOf(9 * cols + 7 to 1, 2 * cols + 6 to 1, 11 * cols + 2 to 2)
+        val start = cols + 1; val exit = (rows - 2) * cols + cols - 2
+        val before = MMGen.trace(orient, walls, srcs, 0.07, 60.0)
+        assertFalse(before[start])
+        assertFalse(MMGen.pathExists(start, exit, before, walls))
+        orient[9 * cols + 7] = 2; orient[11 * cols + 2] = 4
+        val after = MMGen.trace(orient, walls, srcs, 0.07, 60.0)
+        assertTrue(MMGen.pathExists(start, exit, after, walls))
+        // Generated boards start the player safe, next to a solvable room.
+        val g = MirrorMazeGame.gen(3)
+        assertFalse(MMGen.trace(g.orient, g.walls, g.sources, 0.07, 60.0)[g.start])
     }
 }
