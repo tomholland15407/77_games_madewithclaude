@@ -119,6 +119,8 @@ Status legend: done = rules, levels, art and demo ported.
 50. Rainbow Roll (`color-bump`): done
 51. Bridges (`hashi-bridges`): done — archipelago art (sea swells, sandy palm islands, plank bridges with rope rails), same web generator via BoardCache prefetch, crossing check, connectivity win, scripted demo.
 52. Tents & Trees (`tents-trees`): done — Frozax-style campsite card, same solved-first generator via BoardCache prefetch, perfect-matching win check, deduction demo; grid drawn in one Canvas and hit-tested with the iOS cell geometry.
+53. Crate Push (`crate-push`): done — Sokoban warehouse (running-bond bricks, floorboards, ✕ targets, X-braced crates, banana keeper), same push-BFS verifier on Long bitmasks via BoardCache prefetch, corner-deadlock fail, steel d-pad, scripted 4-push demo.
+54. Space Rubble (`asteroids`): done — Atari vector look (wrapping glowing rock outlines, arrow ship with flicker flame, dot bullets/bursts), same physics and torus collisions, round arcade hold buttons (RotateLeft/RotateRight/LocalFireDepartment/WifiTethering icons), lead-intercept demo autopilot.
 
 (Remaining games are listed as they are ported.)
 

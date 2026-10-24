@@ -53,6 +53,8 @@ import com.gogs.bananagame.games.logdarts.LogDartsGame
 import com.gogs.bananagame.games.rainbowroll.RainbowRollGame
 import com.gogs.bananagame.games.bridges.BridgesGame
 import com.gogs.bananagame.games.tentstrees.TentsTreesGame
+import com.gogs.bananagame.games.cratepush.CratePushGame
+import com.gogs.bananagame.games.spacerubble.SpaceRubbleGame
 
 /** The master list of games shown in the feed, in the iOS `GameRegistry.all` order. */
 object GameRegistry {
@@ -110,6 +112,8 @@ object GameRegistry {
             RainbowRollGame.definition,
             BridgesGame.definition,
             TentsTreesGame.definition,
+            CratePushGame.definition,
+            SpaceRubbleGame.definition,
         )
     }
 }
