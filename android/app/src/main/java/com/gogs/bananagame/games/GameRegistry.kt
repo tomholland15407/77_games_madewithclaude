@@ -41,6 +41,8 @@ import com.gogs.bananagame.games.mazemuncher.MazeMuncherGame
 import com.gogs.bananagame.games.laserdodge.LaserDodgeGame
 import com.gogs.bananagame.games.brickbreaker.BrickBreakerGame
 import com.gogs.bananagame.games.dodgeball.DodgeballGame
+import com.gogs.bananagame.games.chesssweep.ChessSweepGame
+import com.gogs.bananagame.games.bananaflutter.BananaFlutterGame
 
 /** The master list of games shown in the feed, in the iOS `GameRegistry.all` order. */
 object GameRegistry {
@@ -86,6 +88,8 @@ object GameRegistry {
             LaserDodgeGame.definition,
             BrickBreakerGame.definition,
             DodgeballGame.definition,
+            ChessSweepGame.definition,
+            BananaFlutterGame.definition,
         )
     }
 }

@@ -107,6 +107,8 @@ Status legend: done = rules, levels, art and demo ported.
 38. Laser Dodge (`laser-dodge`): done (shared `core/FloatingJoystick.kt`)
 39. Brick Breaker (`brick-breaker`): done (power-up icons: SF Symbols → Material)
 40. Dodgeball (`dodgeball`): done
+41. Chess Sweep (`solo-chess`): done (prefetched via BoardCache)
+42. Banana Flutter (`flappy-banana`): done (static backdrop cached in a bitmap)
 
 (Remaining games are listed as they are ported.)
 
