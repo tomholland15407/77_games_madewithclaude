@@ -115,6 +115,8 @@ Status legend: done = rules, levels, art and demo ported.
 46. Jetpack Banana (`jetpack-banana`): done (corridor strip pre-rendered to a bitmap and slid)
 47. Square Sprint (`geometry-dash`): done
 48. Prism Pass (`color-switch`): done
+49. Log Darts (`knife-hit`): done
+50. Rainbow Roll (`color-bump`): done
 
 (Remaining games are listed as they are ported.)
 
