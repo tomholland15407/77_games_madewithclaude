@@ -14,6 +14,7 @@ import com.gogs.bananagame.games.slidebots.SlideBotsGame
 import com.gogs.bananagame.games.tentstrees.TentsGen
 import com.gogs.bananagame.games.tentstrees.TentsTreesGame
 import com.gogs.bananagame.games.tiletrio.TTGen
+import com.gogs.bananagame.games.fruittumble.FMWorld
 import com.gogs.bananagame.games.pipeflow.PCell as PipeCell
 import com.gogs.bananagame.games.pipeflow.PipeGen
 import com.gogs.bananagame.games.critterduel.CDBattle
@@ -38,6 +39,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import kotlin.math.max
 import kotlin.random.Random
 
 /** Pure game-logic checks: generators produce solvable boards, rule helpers behave like iOS. */
@@ -244,5 +246,20 @@ class GameLogicTest {
             m[rc.first][rc.second] = PipeGen.rotateCW(m[rc.first][rc.second])
             assertEquals(k == taps.size - 1, PipeCell(2, 3) in PipeGen.flows(m, PipeCell(2, 0), 4))
         }
+    }
+
+    @Test
+    fun fruitTumbleDemoChainsToAPear() {
+        // The manual clip: cherry onto cherry, then persimmon onto persimmon → apple → pear.
+        val w = FMWorld()
+        for ((tier, x) in listOf(5 to 0.14, 4 to 0.36, 1 to 0.62, 0 to 0.84, 2 to 0.9, 3 to 0.6)) { w.add(tier, x, 0.1); repeat(30) { w.step(1.0 / 60) } }
+        repeat(120) { w.step(1.0 / 60) }
+        var best = 0
+        for ((k, d) in listOf(0 to 0.84, 4 to 0.36).withIndex()) {
+            repeat(32) { w.step(1.0 / 60); best = max(best, w.merges.maxOfOrNull { it.first } ?: 0) }
+            w.add(d.first, d.second)
+            repeat(if (k == 0) 70 else 110) { w.step(1.0 / 60); best = max(best, w.merges.maxOfOrNull { it.first } ?: 0) }
+        }
+        assertEquals(6, best)
     }
 }

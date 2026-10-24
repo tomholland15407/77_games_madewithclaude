@@ -68,6 +68,7 @@ import com.gogs.bananagame.games.guardpatrol.GuardPatrolGame
 import com.gogs.bananagame.games.artilleryduel.ArtilleryDuelGame
 import com.gogs.bananagame.games.gridburst.GridBurstGame
 import com.gogs.bananagame.games.tiletrio.TileTrioGame
+import com.gogs.bananagame.games.fruittumble.FruitTumbleGame
 
 /** The master list of games shown in the feed, in the iOS `GameRegistry.all` order. */
 object GameRegistry {
@@ -140,6 +141,7 @@ object GameRegistry {
             ArtilleryDuelGame.definition,
             GridBurstGame.definition,
             TileTrioGame.definition,
+            FruitTumbleGame.definition,
         )
     }
 }
