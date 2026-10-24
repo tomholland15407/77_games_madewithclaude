@@ -109,6 +109,7 @@ Status legend: done = rules, levels, art and demo ported.
 40. Dodgeball (`dodgeball`): done
 41. Chess Sweep (`solo-chess`): done (prefetched via BoardCache)
 42. Banana Flutter (`flappy-banana`): done (static backdrop cached in a bitmap)
+43. Stack (`stack`): done
 
 (Remaining games are listed as they are ported.)
 
@@ -124,6 +125,19 @@ These are skipped in the feed-order pass and ported last (the PR waits for them)
 - Queens (`queens`)
 - Banana Getaway (`rush-hour`)
 - Sunset Putt (`desert-golf`)
+
+Also in that batch: review these already-ported large, complicated games line by line against their
+iOS source (rules, tuning numbers, demo scripts, art) and fix any drift:
+
+- Lawn Defense (`lawn-defense`): LawnDefenseGame/Art/Bosses.swift → the `lawndefense` package
+- Critter Duel (`critter-duel`)
+- Turbo Racer (`turbo-racer`)
+- Ledge Brawl (`gun-mayhem`)
+- Statue Maze (`lolo`)
+- Free the Banana (`klotski`)
+- Assassin (`assassin`)
+- Brick Breaker (`brick-breaker`)
+- (any later port over ~850 lines of Swift is added here as it lands)
 
 ## Behaviour differences
 
