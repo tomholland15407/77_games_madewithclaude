@@ -98,11 +98,12 @@ Status legend: done = rules, levels, art and demo ported.
 29. Jungle Loop (`slitherlink`): done
 30. Chef's Order (`uncle-roger`): done (ChalkboardSE → Android's casual face)
 31. Spot the Difference (`spot-difference`): done (sticker icons: SF Symbols → Material; bird → bee, ant → bug, tortoise → lotus)
-
 32. Assassin (`assassin`): done
 33. Park King (`parking`): done
 34. Header Duel (`head-soccer`): done
 35. Tower of Hanoi (`tower-of-hanoi`): done
+36. Lights Out (`lights-out`): done
+37. Maze Muncher (`maze-muncher`): done
 
 (Remaining games are listed as they are ported.)
 
