@@ -121,6 +121,7 @@ Status legend: done = rules, levels, art and demo ported.
 52. Tents & Trees (`tents-trees`): done — Frozax-style campsite card, same solved-first generator via BoardCache prefetch, perfect-matching win check, deduction demo; grid drawn in one Canvas and hit-tested with the iOS cell geometry.
 53. Crate Push (`crate-push`): done — Sokoban warehouse (running-bond bricks, floorboards, ✕ targets, X-braced crates, banana keeper), same push-BFS verifier on Long bitmasks via BoardCache prefetch, corner-deadlock fail, steel d-pad, scripted 4-push demo.
 54. Space Rubble (`asteroids`): done — Atari vector look (wrapping glowing rock outlines, arrow ship with flicker flame, dot bullets/bursts), same physics and torus collisions, round arcade hold buttons (RotateLeft/RotateRight/LocalFireDepartment/WifiTethering icons), lead-intercept demo autopilot.
+55. Moon Touchdown (`lunar-lander`): done — Atari vector ridge over per-world rock, blinking pad lights, gold-foil Apollo lander, dust/debris effects, Earth / Mars moons / ringed giant skies, speed+fuel gauges (Speed/LocalGasStation icons), console hold keys, same physics and the iOS autopilot demo.
 
 (Remaining games are listed as they are ported.)
 

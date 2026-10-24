@@ -55,6 +55,7 @@ import com.gogs.bananagame.games.bridges.BridgesGame
 import com.gogs.bananagame.games.tentstrees.TentsTreesGame
 import com.gogs.bananagame.games.cratepush.CratePushGame
 import com.gogs.bananagame.games.spacerubble.SpaceRubbleGame
+import com.gogs.bananagame.games.moontouchdown.MoonTouchdownGame
 
 /** The master list of games shown in the feed, in the iOS `GameRegistry.all` order. */
 object GameRegistry {
@@ -114,6 +115,7 @@ object GameRegistry {
             TentsTreesGame.definition,
             CratePushGame.definition,
             SpaceRubbleGame.definition,
+            MoonTouchdownGame.definition,
         )
     }
 }
