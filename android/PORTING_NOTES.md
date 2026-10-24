@@ -125,6 +125,7 @@ Status legend: done = rules, levels, art and demo ported.
 56. Tunnel Pump (`dig-dug`): done — Namco Dig Dug look (sky with a flower per level, stippled per-level strata, round tunnels, bedrock, teetering boulders, Pooka with halo, Fygar, helmeted banana digger, hose harpoon), same rules / monster AI / boulder physics stepped at the iOS 30 Hz cadence, ground cached to a bitmap redrawn only when a cell is dug, scripted demo. (On the review list: 934 Swift lines.)
 57. Pyramid Hop (`qbert`): done — Gottlieb look (tri-colour cubes per level, arcing orange hopper, coiled Coily, change-to sample, #%&! balloon and fall into the void), same rules / hunter grace / clock, diagonal keys (NorthWest/NorthEast/SouthWest/SouthEast icons), DP-route demo.
 58. Slide Bots (`ricochet-robots`): done — board-game art (ivory bevelled squares, black walls, ringed-planet target, glossy robot pieces on blue felt), same BFS-verified generator (Long state keys) via BoardCache prefetch, robots ease along their slides, Start/Replay/HourglassBottom icons, scripted overshoot-reset-backstop demo.
+59. Decoy (`decoy`): done — Soliton radar (phosphor grid on green glass, hatched walls, scanlines, red guard blips with cyan/amber cones, ?/! marks, sound rings, pulsing objective, banana blip; map cached to a bitmap), same generator via BoardCache prefetch, same guard AI / vision / LOS, SettingsInputAntenna icon for decoys, scripted demo with the 4.3 s throw.
 
 (Remaining games are listed as they are ported.)
 
