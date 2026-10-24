@@ -137,7 +137,7 @@ Status legend: done = rules, levels, art and demo ported.
 68. Fruit Tumble (`fruit-merge`, locksFeed): done — Suika look (cream tub with a wooden rim on a peach backdrop, FruitArt fruit with faces pre-rendered once per tier and stamped rotated, aim guide, flashing danger line, juice splashes, evolution strip, GOAL/NEXT bubbles), same position-based physics (10 substeps, friction, merges) at fixed 1/60 s, touchDrag aiming, scripted demo; a unit test confirms the demo's chain ends in a pear.
 69. Landing Lines (`flight-control`, locksFeed): done — Flight Control airfield (mown grass, patches, trees, painted runways with piano keys / dashed centre lines / approach chevrons / dashed landing discs, helipad; cached to a bitmap), cartoon top-down jets, props and helicopters with ground shadows and spinning blades, dotted routes, blinking arrival chevrons, proximity rings, crash bursts, FlightLand HUD icon; same spawn / route-lock / landing / collision rules at fixed 1/60 s, touchDrag routes, scripted two-landing demo.
 
-(Remaining games are listed as they are ported.)
+(The feed-order pass is complete: 69 of 77 games. The 8 deferred games below are added to this list as they are ported.)
 
 ### Deferred to a final higher-effort batch
 
@@ -151,6 +151,11 @@ These are skipped in the feed-order pass and ported last (the PR waits for them)
 - Queens (`queens`)
 - Banana Getaway (`rush-hour`)
 - Sunset Putt (`desert-golf`)
+
+`games/GameRegistry.kt` lists the 69 ported games in feed order. Each deferred game goes in at its
+iOS feed position: Cat Burglar after Laser Dodge; Cheer Up Monkey after Banana Flutter; Canyon Plink
+after Space Rubble; Sniper then Rock 'n' Rocket after Decoy; Banana Getaway after Guard Patrol;
+Queens after Artillery Duel; Sunset Putt last (after Landing Lines).
 
 Also in that batch: review these already-ported large, complicated games line by line against their
 iOS source (rules, tuning numbers, demo scripts, art) and fix any drift:
