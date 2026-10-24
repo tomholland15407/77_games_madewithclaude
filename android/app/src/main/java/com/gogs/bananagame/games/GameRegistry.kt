@@ -44,6 +44,7 @@ import com.gogs.bananagame.games.dodgeball.DodgeballGame
 import com.gogs.bananagame.games.chesssweep.ChessSweepGame
 import com.gogs.bananagame.games.bananaflutter.BananaFlutterGame
 import com.gogs.bananagame.games.stack.StackGame
+import com.gogs.bananagame.games.juiceblade.JuiceBladeGame
 
 /** The master list of games shown in the feed, in the iOS `GameRegistry.all` order. */
 object GameRegistry {
@@ -92,6 +93,7 @@ object GameRegistry {
             ChessSweepGame.definition,
             BananaFlutterGame.definition,
             StackGame.definition,
+            JuiceBladeGame.definition,
         )
     }
 }

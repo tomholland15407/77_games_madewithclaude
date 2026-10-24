@@ -110,6 +110,7 @@ Status legend: done = rules, levels, art and demo ported.
 41. Chess Sweep (`solo-chess`): done (prefetched via BoardCache)
 42. Banana Flutter (`flappy-banana`): done (static backdrop cached in a bitmap)
 43. Stack (`stack`): done
+44. Juice Blade (`fruit-ninja`): done
 
 (Remaining games are listed as they are ported.)
 
