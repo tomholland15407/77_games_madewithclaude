@@ -69,6 +69,7 @@ import com.gogs.bananagame.games.artilleryduel.ArtilleryDuelGame
 import com.gogs.bananagame.games.gridburst.GridBurstGame
 import com.gogs.bananagame.games.tiletrio.TileTrioGame
 import com.gogs.bananagame.games.fruittumble.FruitTumbleGame
+import com.gogs.bananagame.games.landinglines.LandingLinesGame
 
 /** The master list of games shown in the feed, in the iOS `GameRegistry.all` order. */
 object GameRegistry {
@@ -142,6 +143,7 @@ object GameRegistry {
             GridBurstGame.definition,
             TileTrioGame.definition,
             FruitTumbleGame.definition,
+            LandingLinesGame.definition,
         )
     }
 }
