@@ -113,6 +113,8 @@ Status legend: done = rules, levels, art and demo ported.
 44. Juice Blade (`fruit-ninja`): done
 45. Sketch Hop (`doodle-jump`): done (Noteworthy → Android casual face)
 46. Jetpack Banana (`jetpack-banana`): done (corridor strip pre-rendered to a bitmap and slid)
+47. Square Sprint (`geometry-dash`): done
+48. Prism Pass (`color-switch`): done
 
 (Remaining games are listed as they are ported.)
 
