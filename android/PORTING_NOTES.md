@@ -105,6 +105,8 @@ Status legend: done = rules, levels, art and demo ported.
 36. Lights Out (`lights-out`): done
 37. Maze Muncher (`maze-muncher`): done
 38. Laser Dodge (`laser-dodge`): done (shared `core/FloatingJoystick.kt`)
+39. Brick Breaker (`brick-breaker`): done (power-up icons: SF Symbols → Material)
+40. Dodgeball (`dodgeball`): done
 
 (Remaining games are listed as they are ported.)
 
