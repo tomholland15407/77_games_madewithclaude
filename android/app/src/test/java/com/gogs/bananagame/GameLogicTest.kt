@@ -13,6 +13,9 @@ import com.gogs.bananagame.games.slidebots.RRGen
 import com.gogs.bananagame.games.slidebots.SlideBotsGame
 import com.gogs.bananagame.games.tentstrees.TentsGen
 import com.gogs.bananagame.games.tentstrees.TentsTreesGame
+import com.gogs.bananagame.games.tiletrio.TTGen
+import com.gogs.bananagame.games.pipeflow.PCell as PipeCell
+import com.gogs.bananagame.games.pipeflow.PipeGen
 import com.gogs.bananagame.games.critterduel.CDBattle
 import com.gogs.bananagame.games.critterduel.CDEvent
 import com.gogs.bananagame.games.critterduel.CDType
@@ -222,5 +225,24 @@ class GameLogicTest {
         // Generated boards start the player safe, next to a solvable room.
         val g = MirrorMazeGame.gen(3)
         assertFalse(MMGen.trace(g.orient, g.walls, g.sources, 0.07, 60.0)[g.start])
+    }
+
+    @Test
+    fun tileTrioAndPipeBoardsAreWellFormed() {
+        for (level in 1..7) {
+            val p = TTGen.params(level)
+            val tiles = TTGen.generate(p)
+            assertEquals(p.count, tiles.size)
+            assertTrue(tiles.groupBy { it.kind }.values.all { it.size % 3 == 0 })
+            val b = PipeGen.generate(intArrayOf(4, 4, 5, 5, 6, 6, 6)[level - 1], intArrayOf(8, 10, 13, 16, 20, 24, 28)[level - 1])
+            assertFalse(b.drain in PipeGen.flows(b.masks, b.source, b.masks.size))
+        }
+        // Pipe Flow demo: only the 13th tap connects the drain.
+        val m = listOf(intArrayOf(6, 3, 3, 5), intArrayOf(12, 10, 10, 6), intArrayOf(1, 12, 10, 2), intArrayOf(9, 9, 6, 12))
+        val taps = listOf(2 to 0, 2 to 1, 1 to 1, 0 to 1, 0 to 2, 0 to 2, 1 to 2, 2 to 2, 3 to 2, 3 to 2, 3 to 2, 3 to 3, 2 to 3)
+        for ((k, rc) in taps.withIndex()) {
+            m[rc.first][rc.second] = PipeGen.rotateCW(m[rc.first][rc.second])
+            assertEquals(k == taps.size - 1, PipeCell(2, 3) in PipeGen.flows(m, PipeCell(2, 0), 4))
+        }
     }
 }
