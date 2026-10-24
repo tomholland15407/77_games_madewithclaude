@@ -129,6 +129,8 @@ Status legend: done = rules, levels, art and demo ported.
 60. Mirror Maze (`mirror-maze`): done — Deflektor optics lab (steel tiles, riveted walls, wall cannons, pivot-disc mirrors at the beam angle, red beams with white-hot cores, green teleport pad; room cached to a bitmap), same tracer and directed-greedy generator (Int cell indices) via BoardCache prefetch, scripted demo; unit tests check the demo opens after its taps.
 61. Pipe Flow (`pipe-flow`): done — Pipe Mania plumbing (bevelled stone/steel/sewer tiles with screws in an iron frame on a brick wall, flanged steel pipes, glowing juice flow, feed tank and drain grate), same carve-and-scramble generator via BoardCache prefetch, scripted 13-tap demo.
 62. Neon Trails (`light-cycles`): done — TRON grid (neon blue → violet → orange-red, glowing grid and border, light ribbons, sleek cycles, derezz bursts, rival bike icons), same tick/AI/lookahead/aggression, TurnLeft/TurnRight keys, scripted wall demo.
+63. Banana Bomber (`banana-bomber`): done — Bomberman arena (checkered floors by world, bevelled stone pillars, brick blocks cached to a bitmap that re-renders when one is blasted, sparking bombs, flame cross, Balloms, helmeted banana), same rules / chain blasts / chase AI stepped at 30 Hz, scripted two-kill demo.
+64. Guard Patrol (`guard-patrol`): done — vault facility (floor panels, hazard-edged walls, turrets, tracers, red scanner cones, sentry bots, vault chamber = win box, masked banana thief, alarm lamp), same cones / alarm curtain / win box in px, look-ahead demo planner.
 
 (Remaining games are listed as they are ported.)
 
