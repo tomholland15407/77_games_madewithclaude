@@ -99,7 +99,23 @@ Status legend: done = rules, levels, art and demo ported.
 30. Chef's Order (`uncle-roger`): done (ChalkboardSE → Android's casual face)
 31. Spot the Difference (`spot-difference`): done (sticker icons: SF Symbols → Material; bird → bee, ant → bug, tortoise → lotus)
 
+32. Assassin (`assassin`): done
+33. Park King (`parking`): done
+
 (Remaining games are listed as they are ported.)
+
+### Deferred to a final higher-effort batch
+
+These are skipped in the feed-order pass and ported last (the PR waits for them):
+
+- Cheer Up Monkey (`cheer-up-monkey`)
+- Sniper (`sniper`)
+- Rock 'n' Rocket (`rock-n-rocket`)
+- Canyon Plink (`ricochet-shot`)
+- Cat Burglar (`cat-burglar`)
+- Queens (`queens`)
+- Banana Getaway (`rush-hour`)
+- Sunset Putt (`desert-golf`)
 
 ## Behaviour differences
 

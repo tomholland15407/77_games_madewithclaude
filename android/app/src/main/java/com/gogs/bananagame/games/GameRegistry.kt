@@ -4,6 +4,8 @@ import com.gogs.bananagame.core.GameDefinition
 import com.gogs.bananagame.games.jungleloop.JungleLoopGame
 import com.gogs.bananagame.games.chefsorder.ChefsOrderGame
 import com.gogs.bananagame.games.spotthedifference.SpotTheDifferenceGame
+import com.gogs.bananagame.games.assassin.AssassinGame
+import com.gogs.bananagame.games.parkking.ParkKingGame
 import com.gogs.bananagame.games.lawndefense.LawnDefenseGame
 import com.gogs.bananagame.games.critterduel.CritterDuelGame
 import com.gogs.bananagame.games.planecrash.PlaneCrashGame
@@ -68,6 +70,8 @@ object GameRegistry {
             JungleLoopGame.definition,
             ChefsOrderGame.definition,
             SpotTheDifferenceGame.definition,
+            AssassinGame.definition,
+            ParkKingGame.definition,
         )
     }
 }
