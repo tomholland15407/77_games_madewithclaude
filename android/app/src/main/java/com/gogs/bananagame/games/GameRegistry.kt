@@ -65,6 +65,7 @@ import com.gogs.bananagame.games.pipeflow.PipeFlowGame
 import com.gogs.bananagame.games.neontrails.NeonTrailsGame
 import com.gogs.bananagame.games.bananabomber.BananaBomberGame
 import com.gogs.bananagame.games.guardpatrol.GuardPatrolGame
+import com.gogs.bananagame.games.artilleryduel.ArtilleryDuelGame
 
 /** The master list of games shown in the feed, in the iOS `GameRegistry.all` order. */
 object GameRegistry {
@@ -134,6 +135,7 @@ object GameRegistry {
             NeonTrailsGame.definition,
             BananaBomberGame.definition,
             GuardPatrolGame.definition,
+            ArtilleryDuelGame.definition,
         )
     }
 }
