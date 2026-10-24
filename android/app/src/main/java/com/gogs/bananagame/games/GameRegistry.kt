@@ -38,6 +38,7 @@ import com.gogs.bananagame.games.headerduel.HeaderDuelGame
 import com.gogs.bananagame.games.towerofhanoi.TowerOfHanoiGame
 import com.gogs.bananagame.games.lightsout.LightsOutGame
 import com.gogs.bananagame.games.mazemuncher.MazeMuncherGame
+import com.gogs.bananagame.games.laserdodge.LaserDodgeGame
 
 /** The master list of games shown in the feed, in the iOS `GameRegistry.all` order. */
 object GameRegistry {
@@ -80,6 +81,7 @@ object GameRegistry {
             TowerOfHanoiGame.definition,
             LightsOutGame.definition,
             MazeMuncherGame.definition,
+            LaserDodgeGame.definition,
         )
     }
 }
