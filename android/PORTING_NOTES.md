@@ -101,6 +101,8 @@ Status legend: done = rules, levels, art and demo ported.
 
 32. Assassin (`assassin`): done
 33. Park King (`parking`): done
+34. Header Duel (`head-soccer`): done
+35. Tower of Hanoi (`tower-of-hanoi`): done
 
 (Remaining games are listed as they are ported.)
 

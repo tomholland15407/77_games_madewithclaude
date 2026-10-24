@@ -34,6 +34,8 @@ import com.gogs.bananagame.games.tankmaze.TankMazeGame
 import com.gogs.bananagame.games.pegsolitaire.PegSolitaireGame
 import com.gogs.bananagame.games.quickmath.QuickMathGame
 import com.gogs.bananagame.games.memory.MemoryGame
+import com.gogs.bananagame.games.headerduel.HeaderDuelGame
+import com.gogs.bananagame.games.towerofhanoi.TowerOfHanoiGame
 
 /** The master list of games shown in the feed, in the iOS `GameRegistry.all` order. */
 object GameRegistry {
@@ -72,6 +74,8 @@ object GameRegistry {
             SpotTheDifferenceGame.definition,
             AssassinGame.definition,
             ParkKingGame.definition,
+            HeaderDuelGame.definition,
+            TowerOfHanoiGame.definition,
         )
     }
 }
