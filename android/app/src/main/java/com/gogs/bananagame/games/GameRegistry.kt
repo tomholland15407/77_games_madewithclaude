@@ -57,6 +57,8 @@ import com.gogs.bananagame.games.cratepush.CratePushGame
 import com.gogs.bananagame.games.spacerubble.SpaceRubbleGame
 import com.gogs.bananagame.games.moontouchdown.MoonTouchdownGame
 import com.gogs.bananagame.games.tunnelpump.TunnelPumpGame
+import com.gogs.bananagame.games.pyramidhop.PyramidHopGame
+import com.gogs.bananagame.games.slidebots.SlideBotsGame
 
 /** The master list of games shown in the feed, in the iOS `GameRegistry.all` order. */
 object GameRegistry {
@@ -118,6 +120,8 @@ object GameRegistry {
             SpaceRubbleGame.definition,
             MoonTouchdownGame.definition,
             TunnelPumpGame.definition,
+            PyramidHopGame.definition,
+            SlideBotsGame.definition,
         )
     }
 }
