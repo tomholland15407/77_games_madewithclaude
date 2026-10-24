@@ -277,7 +277,7 @@ private fun BridgesView(level: Int, onWin: () -> Unit, onFail: () -> Unit) {
             fun pos(i: Int) = P(ox + (islands[i].c + 0.5) * cell, oy + (islands[i].r + 0.5) * cell)
             for ((p, c) in bridges.entries.sortedWith(compareBy({ it.key.a }, { it.key.b }))) if (c > 0 && p.a < islands.size && p.b < islands.size) bridge(pos(p.a), pos(p.b), c, cell)
             for (i in islands.indices) island(tm, pos(i), cell, islands[i].need, degree(i), selected == i)
-            demoFinger?.let { f -> if (f < islands.size) { val s = cell * 0.5; hand(handP, pos(f).x + cell * 0.3 - s * 0.35, pos(f).y + cell * 0.38 - s * 0.3, s) } }
+            demoFinger?.let { f -> if (f < islands.size) { val s = cell * 0.5; hand(handP, pos(f).x + cell * 0.3 - s / 2, pos(f).y + cell * 0.38 - s / 2, s) } }
         }
     }
 }
