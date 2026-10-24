@@ -132,6 +132,7 @@ Status legend: done = rules, levels, art and demo ported.
 63. Banana Bomber (`banana-bomber`): done — Bomberman arena (checkered floors by world, bevelled stone pillars, brick blocks cached to a bitmap that re-renders when one is blasted, sparking bombs, flame cross, Balloms, helmeted banana), same rules / chain blasts / chase AI stepped at 30 Hz, scripted two-kill demo.
 64. Guard Patrol (`guard-patrol`): done — vault facility (floor panels, hazard-edged walls, turrets, tracers, red scanner cones, sentry bots, vault chamber = win box, masked banana thief, alarm lamp), same cones / alarm curtain / win box in px, look-ahead demo planner.
 65. Artillery Duel (`artillery-duel`): done — Scorched Earth look (banded skies day → red storm with stars at night, layered dirt with grassy rim cached to a bitmap, domed tanks on treads, spinning banana shell with comet tail, blasts and mushroom clouds, shell pips and wind flag), same ballistics / AI aim search / phases, Material3 sliders in banana, GpsFixed FIRE key, scripted overshoot-then-hit demo (touches swallowed so its sliders can't be dragged).
+66. Grid Burst (`block-blast`, locksFeed): done — Block Blast look (navy recessed board on blue, glossy bevelled blocks, lifted dragged piece with a blurred shadow, ghost + recolour preview of finishing lines, burst clears, gradient praise banners with an outline), same shape tiers / deal / prefill / stuck rules, touchDrag from the tray, scripted three-drop demo.
 
 (Remaining games are listed as they are ported.)
 
