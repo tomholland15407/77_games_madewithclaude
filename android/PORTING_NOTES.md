@@ -122,6 +122,7 @@ Status legend: done = rules, levels, art and demo ported.
 53. Crate Push (`crate-push`): done — Sokoban warehouse (running-bond bricks, floorboards, ✕ targets, X-braced crates, banana keeper), same push-BFS verifier on Long bitmasks via BoardCache prefetch, corner-deadlock fail, steel d-pad, scripted 4-push demo.
 54. Space Rubble (`asteroids`): done — Atari vector look (wrapping glowing rock outlines, arrow ship with flicker flame, dot bullets/bursts), same physics and torus collisions, round arcade hold buttons (RotateLeft/RotateRight/LocalFireDepartment/WifiTethering icons), lead-intercept demo autopilot.
 55. Moon Touchdown (`lunar-lander`): done — Atari vector ridge over per-world rock, blinking pad lights, gold-foil Apollo lander, dust/debris effects, Earth / Mars moons / ringed giant skies, speed+fuel gauges (Speed/LocalGasStation icons), console hold keys, same physics and the iOS autopilot demo.
+56. Tunnel Pump (`dig-dug`): done — Namco Dig Dug look (sky with a flower per level, stippled per-level strata, round tunnels, bedrock, teetering boulders, Pooka with halo, Fygar, helmeted banana digger, hose harpoon), same rules / monster AI / boulder physics stepped at the iOS 30 Hz cadence, ground cached to a bitmap redrawn only when a cell is dug, scripted demo. (On the review list: 934 Swift lines.)
 
 (Remaining games are listed as they are ported.)
 
@@ -149,6 +150,7 @@ iOS source (rules, tuning numbers, demo scripts, art) and fix any drift:
 - Free the Banana (`klotski`)
 - Assassin (`assassin`)
 - Brick Breaker (`brick-breaker`)
+- Tunnel Pump (`dig-dug`)
 - (any later port over ~850 lines of Swift is added here as it lands)
 
 ## Behaviour differences

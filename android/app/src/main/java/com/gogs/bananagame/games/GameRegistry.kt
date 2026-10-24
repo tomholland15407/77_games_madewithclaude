@@ -56,6 +56,7 @@ import com.gogs.bananagame.games.tentstrees.TentsTreesGame
 import com.gogs.bananagame.games.cratepush.CratePushGame
 import com.gogs.bananagame.games.spacerubble.SpaceRubbleGame
 import com.gogs.bananagame.games.moontouchdown.MoonTouchdownGame
+import com.gogs.bananagame.games.tunnelpump.TunnelPumpGame
 
 /** The master list of games shown in the feed, in the iOS `GameRegistry.all` order. */
 object GameRegistry {
@@ -116,6 +117,7 @@ object GameRegistry {
             CratePushGame.definition,
             SpaceRubbleGame.definition,
             MoonTouchdownGame.definition,
+            TunnelPumpGame.definition,
         )
     }
 }
