@@ -30,6 +30,7 @@ The iOS sources are untouched; everything lives in `android/`.
   iOS project (the AppIcon set is empty), so there was nothing to convert; the launcher icon is a
   vector banana.
 - SF Symbols → Material icons (extended set).
+- SwiftUI's named system colours (`.green`, `.orange`, `.mint`…) → `core/SystemColors.kt` (`SysColor`).
 - `ScrollView` paging feed → `VerticalPager`; sheets → full-screen slide-up overlays; the manual's
   `fullScreenCover` → a full-screen `Dialog`.
 - Live manual demos (`\.isDemo`) → `LocalIsDemo` composition local; each game runs its scripted demo.
@@ -95,6 +96,8 @@ Status legend: done = rules, levels, art and demo ported.
 27. Critter Duel (`critter-duel`): done (battle rules + SplitMix RNG ported bit-for-bit; demo seed unit-tested)
 28. Lawn Defense (`lawn-defense`): done (LDWorld sim ported 1:1 incl. SplitMix RNG; all 7 worlds, 10 plants, 7 bosses)
 29. Jungle Loop (`slitherlink`): done
+30. Chef's Order (`uncle-roger`): done (ChalkboardSE → Android's casual face)
+31. Spot the Difference (`spot-difference`): done (sticker icons: SF Symbols → Material; bird → bee, ant → bug, tortoise → lotus)
 
 (Remaining games are listed as they are ported.)
 
