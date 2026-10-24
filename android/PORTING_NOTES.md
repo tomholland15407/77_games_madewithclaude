@@ -127,6 +127,8 @@ Status legend: done = rules, levels, art and demo ported.
 58. Slide Bots (`ricochet-robots`): done — board-game art (ivory bevelled squares, black walls, ringed-planet target, glossy robot pieces on blue felt), same BFS-verified generator (Long state keys) via BoardCache prefetch, robots ease along their slides, Start/Replay/HourglassBottom icons, scripted overshoot-reset-backstop demo.
 59. Decoy (`decoy`): done — Soliton radar (phosphor grid on green glass, hatched walls, scanlines, red guard blips with cyan/amber cones, ?/! marks, sound rings, pulsing objective, banana blip; map cached to a bitmap), same generator via BoardCache prefetch, same guard AI / vision / LOS, SettingsInputAntenna icon for decoys, scripted demo with the 4.3 s throw.
 60. Mirror Maze (`mirror-maze`): done — Deflektor optics lab (steel tiles, riveted walls, wall cannons, pivot-disc mirrors at the beam angle, red beams with white-hot cores, green teleport pad; room cached to a bitmap), same tracer and directed-greedy generator (Int cell indices) via BoardCache prefetch, scripted demo; unit tests check the demo opens after its taps.
+61. Pipe Flow (`pipe-flow`): done — Pipe Mania plumbing (bevelled stone/steel/sewer tiles with screws in an iron frame on a brick wall, flanged steel pipes, glowing juice flow, feed tank and drain grate), same carve-and-scramble generator via BoardCache prefetch, scripted 13-tap demo.
+62. Neon Trails (`light-cycles`): done — TRON grid (neon blue → violet → orange-red, glowing grid and border, light ribbons, sleek cycles, derezz bursts, rival bike icons), same tick/AI/lookahead/aggression, TurnLeft/TurnRight keys, scripted wall demo.
 
 (Remaining games are listed as they are ported.)
 
