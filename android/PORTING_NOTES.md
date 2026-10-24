@@ -111,6 +111,8 @@ Status legend: done = rules, levels, art and demo ported.
 42. Banana Flutter (`flappy-banana`): done (static backdrop cached in a bitmap)
 43. Stack (`stack`): done
 44. Juice Blade (`fruit-ninja`): done
+45. Sketch Hop (`doodle-jump`): done (Noteworthy → Android casual face)
+46. Jetpack Banana (`jetpack-banana`): done (corridor strip pre-rendered to a bitmap and slid)
 
 (Remaining games are listed as they are ported.)
 
