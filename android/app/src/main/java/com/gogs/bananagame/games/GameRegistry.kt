@@ -71,6 +71,7 @@ import com.gogs.bananagame.games.tiletrio.TileTrioGame
 import com.gogs.bananagame.games.fruittumble.FruitTumbleGame
 import com.gogs.bananagame.games.landinglines.LandingLinesGame
 import com.gogs.bananagame.games.catburglar.CatBurglarGame
+import com.gogs.bananagame.games.cheerupmonkey.CheerUpMonkeyGame
 
 /** The master list of games shown in the feed, in the iOS `GameRegistry.all` order. */
 object GameRegistry {
@@ -119,6 +120,7 @@ object GameRegistry {
             DodgeballGame.definition,
             ChessSweepGame.definition,
             BananaFlutterGame.definition,
+            CheerUpMonkeyGame.definition,
             StackGame.definition,
             JuiceBladeGame.definition,
             SketchHopGame.definition,
