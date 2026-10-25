@@ -7,6 +7,9 @@ import com.gogs.bananagame.games.canyonplink.PlinkWorld
 import com.gogs.bananagame.games.canyonplink.RSGen
 import com.gogs.bananagame.games.canyonplink.RSParams
 import com.gogs.bananagame.games.cheerupmonkey.CMLoot
+import com.gogs.bananagame.games.sniper.GROUND_V
+import com.gogs.bananagame.games.sniper.SniperWorld
+import com.gogs.bananagame.games.sniper.TARGET_H
 import com.gogs.bananagame.games.cheerupmonkey.CMParams
 import com.gogs.bananagame.games.cheerupmonkey.CMRandom
 import com.gogs.bananagame.games.cheerupmonkey.CMStage
@@ -141,5 +144,23 @@ class DeferredGamesTest {
             val aims = (0 until 360).map { i -> RSGen.shotCells(i / 360.0 * 2 * Math.PI, b.walls, p.maxBounces) }
             assertTrue("level $level must be clearable within ${p.bulletBudget}", RSGen.greedyShots(b.targets, aims) <= p.bulletBudget)
         }
+    }
+
+    @Test
+    fun sniperDemoDropsBothSoldiers() {
+        val w = SniperWorld(1)
+        w.setup(); w.demoSetup()
+        w.areaW = 377.0; w.areaH = 600.0
+        fun wait(dur: Double) = repeat((dur / 0.016).toInt()) { w.tickAmbient(0.016) }
+        fun panTo(gx: Double, gy: Double) {
+            val sx = w.aimX; val sy = w.aimY; val steps = (0.85 / 0.016).toInt()
+            for (k in 1..steps) { val f = 0.5 - 0.5 * Math.cos(Math.PI * k / steps); w.aimX = sx + (gx - sx) * f; w.aimY = sy + (gy - sy) * f; w.tickAmbient(0.016) }
+        }
+        val gy = GROUND_V - TARGET_H / 2
+        wait(0.6); panTo(w.targets.first().x, gy); wait(0.22); w.fire()
+        assertEquals(1, w.targets.size)
+        wait(0.88); panTo(w.targets.first().x, gy); wait(0.22); w.fire()
+        assertEquals(0, w.targets.size)
+        assertFalse("the last shot is the real win()", w.playing)
     }
 }

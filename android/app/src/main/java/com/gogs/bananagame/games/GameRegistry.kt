@@ -73,6 +73,7 @@ import com.gogs.bananagame.games.landinglines.LandingLinesGame
 import com.gogs.bananagame.games.catburglar.CatBurglarGame
 import com.gogs.bananagame.games.cheerupmonkey.CheerUpMonkeyGame
 import com.gogs.bananagame.games.canyonplink.CanyonPlinkGame
+import com.gogs.bananagame.games.sniper.SniperGame
 
 /** The master list of games shown in the feed, in the iOS `GameRegistry.all` order. */
 object GameRegistry {
@@ -140,6 +141,7 @@ object GameRegistry {
             PyramidHopGame.definition,
             SlideBotsGame.definition,
             DecoyGame.definition,
+            SniperGame.definition,
             MirrorMazeGame.definition,
             PipeFlowGame.definition,
             NeonTrailsGame.definition,
