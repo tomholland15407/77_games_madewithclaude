@@ -3,6 +3,7 @@ package com.gogs.bananagame
 import com.gogs.bananagame.games.catburglar.CBGen
 import com.gogs.bananagame.games.catburglar.CBParams
 import com.gogs.bananagame.games.catburglar.CatWorld
+import com.gogs.bananagame.games.bananagetaway.RHGen
 import com.gogs.bananagame.games.canyonplink.PlinkWorld
 import com.gogs.bananagame.games.canyonplink.RSGen
 import com.gogs.bananagame.games.canyonplink.RSParams
@@ -181,6 +182,26 @@ class DeferredGamesTest {
             assertTrue("fires at ${w}x$h", fired)
             assertFalse("finishes at ${w}x$h", race.playing)
             assertEquals("wins at ${w}x$h", RocketRace.LAPS, race.player!!.lap)
+        }
+    }
+
+    @Test
+    fun bananaGetawayBoardsAreSolvableJams() {
+        assertEquals(2, RHGen.shortestSolution(RHGen.demoBoard()))
+        for (level in listOf(1, 2, 3)) {
+            val p = RHGen.Params(level)
+            val b = RHGen.generate(p)
+            assertEquals(RHGen.EXIT_ROW, b[0].r)
+            assertTrue(b[0].horiz)
+            assertFalse(RHGen.goal(b))
+            val cells = mutableSetOf<Int>()
+            for (car in b) for (k in 0 until car.len) {
+                val r = car.r + (if (car.horiz) 0 else k); val c = car.c + (if (car.horiz) k else 0)
+                assertTrue(r in 0 until RHGen.SIZE && c in 0 until RHGen.SIZE)
+                assertTrue("cars overlap", cells.add(r * RHGen.SIZE + c))
+            }
+            val moves = RHGen.shortestSolution(b)
+            assertTrue("level $level is solvable", moves != null && moves > 0)
         }
     }
 }

@@ -75,6 +75,7 @@ import com.gogs.bananagame.games.cheerupmonkey.CheerUpMonkeyGame
 import com.gogs.bananagame.games.canyonplink.CanyonPlinkGame
 import com.gogs.bananagame.games.sniper.SniperGame
 import com.gogs.bananagame.games.rocknrocket.RockNRocketGame
+import com.gogs.bananagame.games.bananagetaway.BananaGetawayGame
 
 /** The master list of games shown in the feed, in the iOS `GameRegistry.all` order. */
 object GameRegistry {
@@ -149,6 +150,7 @@ object GameRegistry {
             NeonTrailsGame.definition,
             BananaBomberGame.definition,
             GuardPatrolGame.definition,
+            BananaGetawayGame.definition,
             ArtilleryDuelGame.definition,
             GridBurstGame.definition,
             TileTrioGame.definition,
