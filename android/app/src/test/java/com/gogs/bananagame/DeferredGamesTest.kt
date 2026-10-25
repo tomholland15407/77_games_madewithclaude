@@ -3,6 +3,9 @@ package com.gogs.bananagame
 import com.gogs.bananagame.games.catburglar.CBGen
 import com.gogs.bananagame.games.catburglar.CBParams
 import com.gogs.bananagame.games.catburglar.CatWorld
+import com.gogs.bananagame.games.canyonplink.PlinkWorld
+import com.gogs.bananagame.games.canyonplink.RSGen
+import com.gogs.bananagame.games.canyonplink.RSParams
 import com.gogs.bananagame.games.cheerupmonkey.CMLoot
 import com.gogs.bananagame.games.cheerupmonkey.CMParams
 import com.gogs.bananagame.games.cheerupmonkey.CMRandom
@@ -111,5 +114,32 @@ class DeferredGamesTest {
         assertEquals(2, st.found)
         st.giveBanana()
         assertTrue(st.bananaGiven)
+    }
+
+    @Test
+    fun canyonPlinkDemoClearsTheRoomInTwoShots() {
+        val w = PlinkWorld(1)
+        w.commit(RSGen.demoBoard())
+        for (a in RSGen.demoAims.drop(1)) {
+            w.aimAngle = a
+            w.fire()
+            var frames = 0
+            while (w.phase == PlinkWorld.Phase.FIRING && frames < 60 * 20) { w.stepBullet(1.0 / 60); frames++ }
+        }
+        assertEquals(0, w.targets.size)
+        assertEquals(PlinkWorld.Phase.DONE, w.phase)
+        assertEquals(1, w.ammo)
+    }
+
+    @Test
+    fun canyonPlinkBoardsNeedNearlyEveryBullet() {
+        for (level in listOf(1, 4, 7)) {
+            val p = RSParams(level)
+            val b = RSGen.generate(p)
+            assertEquals(p.targetCount, b.targets.toSet().size)
+            for (t in b.targets) { assertFalse(b.walls[t.r][t.c]); assertTrue(t.r in 1 until 11) }
+            val aims = (0 until 360).map { i -> RSGen.shotCells(i / 360.0 * 2 * Math.PI, b.walls, p.maxBounces) }
+            assertTrue("level $level must be clearable within ${p.bulletBudget}", RSGen.greedyShots(b.targets, aims) <= p.bulletBudget)
+        }
     }
 }

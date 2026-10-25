@@ -72,6 +72,7 @@ import com.gogs.bananagame.games.fruittumble.FruitTumbleGame
 import com.gogs.bananagame.games.landinglines.LandingLinesGame
 import com.gogs.bananagame.games.catburglar.CatBurglarGame
 import com.gogs.bananagame.games.cheerupmonkey.CheerUpMonkeyGame
+import com.gogs.bananagame.games.canyonplink.CanyonPlinkGame
 
 /** The master list of games shown in the feed, in the iOS `GameRegistry.all` order. */
 object GameRegistry {
@@ -133,6 +134,7 @@ object GameRegistry {
             TentsTreesGame.definition,
             CratePushGame.definition,
             SpaceRubbleGame.definition,
+            CanyonPlinkGame.definition,
             MoonTouchdownGame.definition,
             TunnelPumpGame.definition,
             PyramidHopGame.definition,

@@ -25,17 +25,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.drawscope.CanvasDrawScope
-import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.drawscope.scale as scaleDraw
 import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
@@ -448,20 +442,6 @@ internal class CMFx {
     var unlockedAt: Double? = null
     var givenAt: Double? = null
     var failedAt: Double? = null
-}
-
-/** Draws in points: scales the canvas by its density and hands the block the size in points. */
-internal inline fun DrawScope.inPoints(crossinline block: DrawScope.(w: Double, h: Double) -> Unit) {
-    val u = density
-    val w = size.width / u.toDouble(); val h = size.height / u.toDouble()
-    scaleDraw(u, u, Offset.Zero) { block(w, h) }
-}
-
-/** Static art behind the content, drawn in points once per size into a bitmap. */
-private fun Modifier.artBehind(draw: DrawScope.(w: Double, h: Double) -> Unit): Modifier = drawWithCache {
-    val bmp = ImageBitmap(size.width.toInt().coerceAtLeast(1), size.height.toInt().coerceAtLeast(1))
-    CanvasDrawScope().draw(this, layoutDirection, androidx.compose.ui.graphics.Canvas(bmp), size) { inPoints(draw) }
-    onDrawBehind { drawImage(bmp) }
 }
 
 // Play state.
