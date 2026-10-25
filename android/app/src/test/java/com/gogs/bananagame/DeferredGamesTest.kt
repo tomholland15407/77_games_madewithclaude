@@ -8,6 +8,9 @@ import com.gogs.bananagame.games.canyonplink.PlinkWorld
 import com.gogs.bananagame.games.canyonplink.RSGen
 import com.gogs.bananagame.games.canyonplink.RSParams
 import com.gogs.bananagame.games.cheerupmonkey.CMLoot
+import com.gogs.bananagame.games.queens.QueensBoard
+import com.gogs.bananagame.games.queens.QueensGen
+import com.gogs.bananagame.games.queens.QueensPlay
 import com.gogs.bananagame.games.rocknrocket.RocketRace
 import com.gogs.bananagame.games.sniper.GROUND_V
 import com.gogs.bananagame.games.sniper.SniperWorld
@@ -202,6 +205,35 @@ class DeferredGamesTest {
             }
             val moves = RHGen.shortestSolution(b)
             assertTrue("level $level is solvable", moves != null && moves > 0)
+        }
+    }
+
+    @Test
+    fun queensDemoIsUniqueDeductionAndTheScriptSolvesIt() {
+        val reg = QueensGen.demoRegions; val sol = QueensGen.demoSolution
+        assertEquals(1, QueensGen.solve(5, reg, sol).first)
+        assertTrue(QueensGen.logicSolvable(5, reg, false))
+        val p = QueensPlay(QueensBoard(5, reg, sol), QueensGen.demoColors)
+        for (c in QueensGen.demoNotes) p.tap(c)
+        for (c in QueensGen.demoCrowns) { p.tap(c); assertEquals(1, p.tap(c)) }
+        assertEquals(0, p.mistakes)
+        assertTrue(p.solved)
+    }
+
+    @Test
+    fun queensBoardsAreUniqueAndConnected() {
+        for (level in listOf(1, 2, 3, 4)) {
+            val n = QueensGen.size(level)
+            val b = QueensGen.generate(n, QueensGen.grade(level))
+            assertEquals(n, b.n)
+            val (count, _) = QueensGen.solve(n, b.regions, b.solution)
+            assertEquals("level $level has one answer", 1, count)
+            for (k in 0 until n) {
+                val cells = (0 until n * n).filter { b.regions[it] == k }
+                assertTrue(cells.isNotEmpty())
+                assertEquals("one crown in region $k", 1, b.solution.withIndex().count { b.regions[it.index * n + it.value] == k })
+            }
+            if (QueensGen.grade(level) == 1) assertTrue(QueensGen.logicSolvable(n, b.regions, false))
         }
     }
 }
