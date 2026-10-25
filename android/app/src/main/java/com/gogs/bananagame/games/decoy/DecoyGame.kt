@@ -23,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -183,7 +184,9 @@ private class DecoyWorld(val level: Int) {
     var guards = listOf<Guard>()
     var px = 1.5; var py = 1.5
     var exit = DCell(1, 1)
-    var mdx = 0.0; var mdy = 0.0
+    // Snapshot state, so the keys re-light when the demo script (or a finger) changes them.
+    var mdx by mutableDoubleStateOf(0.0)
+    var mdy by mutableDoubleStateOf(0.0)
     var decoys = 0
     var timeLeft = timeLimit
     var t = 0.0
@@ -423,7 +426,7 @@ private fun DecoyView(level: Int, onWin: () -> Unit, onFail: () -> Unit) {
 /** Military d-pad keys; phosphor green while held. */
 @Composable
 private fun DCKey(world: DecoyWorld, dx: Double, dy: Double, icon: ImageVector, isDemo: Boolean, w: androidx.compose.ui.unit.Dp, h: androidx.compose.ui.unit.Dp) {
-    val lit = world.mdx == dx && world.mdy == dy && (isDemo || world.playing)
+    val lit = isDemo && world.mdx == dx && world.mdy == dy      // as on iOS, only the demo's presses light up
     val radius = if (isDemo) 9.0 else 14.0
     Box(
         Modifier.scale(if (lit) 0.92f else 1f).size(w, h)

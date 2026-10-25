@@ -227,7 +227,7 @@ private fun HeaderDuelView(level: Int, onWin: () -> Unit, onFail: () -> Unit) {
             goalFront()
         }
         tick; demoTick
-        Scoreboard(m, isDemo, Modifier.centerAt(0.5, 0.065))
+        Scoreboard(m.playerScore, m.aiScore, max(0, ceil(m.timeLeft).toInt()), m.timeLeft < 5, m.goalsToWin, isDemo, Modifier.centerAt(0.5, 0.065))
         Column(Modifier.fillMaxSize()) {
             Spacer(Modifier.weight(1f))
             Row(Modifier.fillMaxWidth().padding(horizontal = if (isDemo) 10.dp else 16.dp).padding(bottom = if (isDemo) 4.dp else 18.dp),
@@ -255,7 +255,7 @@ private fun HeaderDuelView(level: Int, onWin: () -> Unit, onFail: () -> Unit) {
 
 /** The match scoreboard: both heads and the score, the clock, and the target. */
 @Composable
-private fun Scoreboard(m: Match, isDemo: Boolean, modifier: Modifier) {
+private fun Scoreboard(playerScore: Int, aiScore: Int, t: Int, low: Boolean, goalsToWin: Int, isDemo: Boolean, modifier: Modifier) {
     Box(modifier) {
         Column(
             Modifier.background(Brush.verticalGradient(listOf(rgb(0.2, 0.26, 0.42), rgb(0.1, 0.13, 0.24))), RoundedCornerShape(10.dp))
@@ -265,17 +265,16 @@ private fun Scoreboard(m: Match, isDemo: Boolean, modifier: Modifier) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Canvas(Modifier.size(22.dp)) { face(size.width / 2.0, size.height / 2.0, size.width * 0.42, true, 1.0) }
                 Text(L("YOU", "BẠN"), style = ts(11.0, FontWeight.Black, BananaTheme.banana))
-                Text("${m.playerScore} : ${m.aiScore}", style = ts(if (isDemo) 18.0 else 22.0, FontWeight.Black),
+                Text("$playerScore : $aiScore", style = ts(if (isDemo) 18.0 else 22.0, FontWeight.Black),
                     modifier = Modifier.background(rgb(0.1, 0.12, 0.2), RoundedCornerShape(5.dp)).padding(horizontal = 8.dp))
                 Text(L("AI", "MÁY"), style = ts(11.0, FontWeight.Black, rgb(1.0, 0.5, 0.45)))
                 Canvas(Modifier.size(22.dp)) { face(size.width / 2.0, size.height / 2.0, size.width * 0.42, false, -1.0) }
             }
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 if (!isDemo) {
-                    val t = max(0, ceil(m.timeLeft).toInt())
-                    Text("%d:%02d".format(t / 60, t % 60), style = ts(13.0, FontWeight.Black, if (m.timeLeft < 5) rgb(1.0, 0.4, 0.35) else rgb(1.0, 0.85, 0.3), Mono))
+                    Text("%d:%02d".format(t / 60, t % 60), style = ts(13.0, FontWeight.Black, if (low) rgb(1.0, 0.4, 0.35) else rgb(1.0, 0.85, 0.3), Mono))
                 }
-                Text(L("first to ${m.goalsToWin}", "về ${m.goalsToWin} trước"), style = ts(10.0, FontWeight.ExtraBold, Color.White.op(0.75)))
+                Text(L("first to $goalsToWin", "về $goalsToWin trước"), style = ts(10.0, FontWeight.ExtraBold, Color.White.op(0.75)))
             }
         }
     }

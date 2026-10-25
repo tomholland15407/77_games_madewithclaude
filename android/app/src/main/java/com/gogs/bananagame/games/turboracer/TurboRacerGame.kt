@@ -237,26 +237,25 @@ private fun TurboRacerView(level: Int, onWin: () -> Unit, onFail: () -> Unit) {
                 drawWorld(world, st, level)
                 world.burst?.let { (bx, by, t0) -> particleBurst(bx * W, by * H, nowSec() - t0, Color(0xFFFF9500), 16, 60.0) }
             }
-            Hud(world, isDemo, tick + demoTick)
+            Hud(world.timeLeft, world.timeLimit, (min(world.distance, world.finish) / world.finish * 100).toInt(), world.speed, isDemo)
         }
         Row(Modifier.padding(bottom = if (isDemo) 4.dp else 8.dp), horizontalArrangement = Arrangement.spacedBy(if (isDemo) 28.dp else 40.dp)) {
-            HoldButton(-1.0, world, isDemo, demoTick)
-            HoldButton(1.0, world, isDemo, demoTick)
+            HoldButton(-1.0, world, isDemo, world.demoSteer)
+            HoldButton(1.0, world, isDemo, world.demoSteer)
         }
     }
 }
 
 @Composable
-private fun Hud(world: RacerWorld, isDemo: Boolean, t: Long) {
-    val frac = world.timeLeft / world.timeLimit
-    val pct = (min(world.distance, world.finish) / world.finish * 100).toInt()
+private fun Hud(timeLeft: Double, timeLimit: Double, pct: Int, speed: Double, isDemo: Boolean) {
+    val frac = timeLeft / timeLimit
     fun st(size: Double, color: Color) = TextStyle(fontSize = size.sp, fontWeight = FontWeight.Black, fontStyle = FontStyle.Italic,
         color = color, fontFamily = Rounded, shadow = Shadow(Color.Black, Offset(3f, 3f), 0f))
     Column(Modifier.fillMaxSize().padding(horizontal = if (isDemo) 10.dp else 12.dp, vertical = if (isDemo) 8.dp else 10.dp)) {
         Row(verticalAlignment = Alignment.Top) {
             if (!isDemo) Column {
                 Text(L("TIME", "GIỜ"), style = st(13.0, rgb(1.0, 0.5, 0.2)))
-                Text("${ceil(world.timeLeft).toInt()}", style = st(34.0, if (frac < 0.3) rgb(1.0, 0.25, 0.2) else rgb(1.0, 0.9, 0.2)))
+                Text("${ceil(timeLeft).toInt()}", style = st(34.0, if (frac < 0.3) rgb(1.0, 0.25, 0.2) else rgb(1.0, 0.9, 0.2)))
             }
             Spacer(Modifier.weight(1f))
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -267,7 +266,7 @@ private fun Hud(world: RacerWorld, isDemo: Boolean, t: Long) {
         }
         Spacer(Modifier.weight(1f))
         Row(verticalAlignment = Alignment.Bottom) {
-            Text("${(world.speed * 30 + 60).toInt()}", style = st(if (isDemo) 16.0 else 22.0, Color.White))
+            Text("${(speed * 30 + 60).toInt()}", style = st(if (isDemo) 16.0 else 22.0, Color.White))
             Spacer(Modifier.width(3.dp))
             Text("km/h", style = st(if (isDemo) 10.0 else 12.0, rgb(1.0, 0.5, 0.2)))
         }
@@ -275,9 +274,9 @@ private fun Hud(world: RacerWorld, isDemo: Boolean, t: Long) {
 }
 
 @Composable
-private fun HoldButton(dir: Double, world: RacerWorld, isDemo: Boolean, t: Int) {
+private fun HoldButton(dir: Double, world: RacerWorld, isDemo: Boolean, demoSteer: Double) {
     var held by remember { mutableStateOf(false) }
-    val pressed = (isDemo && world.demoSteer == dir) || held
+    val pressed = (isDemo && demoSteer == dir) || held
     val sc by animateFloatAsState(if (pressed) 0.9f else 1f, tween(120), label = "hb")
     Box(
         Modifier.scale(sc).size(if (isDemo) 84.dp else 100.dp, if (isDemo) 50.dp else 66.dp)

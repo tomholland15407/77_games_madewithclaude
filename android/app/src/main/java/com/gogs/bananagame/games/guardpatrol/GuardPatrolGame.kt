@@ -21,6 +21,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -118,7 +119,9 @@ private class PatrolWorld(val level: Int) {
     var playing = true
     var guards = listOf<Sentry>()
     var px = 0.5; var py = 0.92
-    var mdx = 0.0; var mdy = 0.0
+    // Snapshot state, so the keys re-light when the demo script (or a finger) changes them.
+    var mdx by mutableDoubleStateOf(0.0)
+    var mdy by mutableDoubleStateOf(0.0)
     var timeLeft = timeLimit
     var aw = 0.0; var ah = 0.0               // play area in px (cone reach scales with its short side)
     var alerted = false
@@ -288,7 +291,7 @@ private fun GuardPatrolView(level: Int, onWin: () -> Unit, onFail: () -> Unit) {
 /** Steel d-pad keys (banana yellow while held). */
 @Composable
 private fun HoldKey(world: PatrolWorld, dx: Double, dy: Double, icon: ImageVector, isDemo: Boolean, w: androidx.compose.ui.unit.Dp, h: androidx.compose.ui.unit.Dp) {
-    val lit = world.mdx == dx && world.mdy == dy && (isDemo || world.playing)
+    val lit = isDemo && world.mdx == dx && world.mdy == dy      // as on iOS, only the demo's presses light up
     Box(
         Modifier.scale(if (lit) 0.9f else 1f).size(w, h)
             .then(if (isDemo) Modifier else Modifier.pressDown(

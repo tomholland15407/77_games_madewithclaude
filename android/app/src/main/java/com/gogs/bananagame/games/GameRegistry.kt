@@ -70,6 +70,7 @@ import com.gogs.bananagame.games.gridburst.GridBurstGame
 import com.gogs.bananagame.games.tiletrio.TileTrioGame
 import com.gogs.bananagame.games.fruittumble.FruitTumbleGame
 import com.gogs.bananagame.games.landinglines.LandingLinesGame
+import com.gogs.bananagame.games.catburglar.CatBurglarGame
 
 /** The master list of games shown in the feed, in the iOS `GameRegistry.all` order. */
 object GameRegistry {
@@ -113,6 +114,7 @@ object GameRegistry {
             LightsOutGame.definition,
             MazeMuncherGame.definition,
             LaserDodgeGame.definition,
+            CatBurglarGame.definition,
             BrickBreakerGame.definition,
             DodgeballGame.definition,
             ChessSweepGame.definition,

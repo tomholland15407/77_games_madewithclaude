@@ -357,7 +357,7 @@ private fun BreachView(level: Int, onWin: () -> Unit, onFail: () -> Unit) {
                 }
             }
             Spacer(Modifier.weight(1f))
-            BreachButton(world, isDemo, demoPress)
+            BreachButton(world, world.charges > 0, isDemo, demoPress)
         }
     }
 }
@@ -389,9 +389,8 @@ private fun PadKey(dc: Int, dr: Int, world: BreachWorld, isDemo: Boolean, demoDi
 }
 
 @Composable
-private fun BreachButton(world: BreachWorld, isDemo: Boolean, demoPress: Boolean) {
+private fun BreachButton(world: BreachWorld, live: Boolean, isDemo: Boolean, demoPress: Boolean) {
     val sc by animateFloatAsState(if (demoPress) 0.88f else 1f, tween(100), label = "b")
-    val live = world.charges > 0
     Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp),
         modifier = if (isDemo) Modifier else Modifier.pressDown(onDown = { if (world.charges > 0) world.breach() })) {
         Canvas(Modifier.size(if (isDemo) 40.dp else 70.dp)) {

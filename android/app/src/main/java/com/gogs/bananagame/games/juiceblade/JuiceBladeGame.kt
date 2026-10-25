@@ -240,7 +240,7 @@ private fun JuiceBladeView(level: Int, onWin: () -> Unit, onFail: () -> Unit) {
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         tick; demoTick
-        if (!isDemo) Hud(tm, world, 1.0, Modifier.fillMaxWidth().height(51.dp))
+        if (!isDemo) Hud(tm, world.sliced, world.target, world.misses, 1.0, Modifier.fillMaxWidth().height(51.dp))
         Box(Modifier.fillMaxWidth().weight(1f)) {
             Canvas(
                 Modifier.fillMaxSize().onSizeChanged { field = it }
@@ -256,7 +256,7 @@ private fun JuiceBladeView(level: Int, onWin: () -> Unit, onFail: () -> Unit) {
                     hand(handP, tip.x * size.width + 10 * density - s / 2, tip.y * size.height + 14 * density - s / 2, s)
                 }
             }
-            if (isDemo) Hud(tm, world, 0.62, Modifier.fillMaxWidth().height(34.dp).padding(horizontal = 6.dp).align(Alignment.TopCenter))
+            if (isDemo) Hud(tm, world.sliced, world.target, world.misses, 0.62, Modifier.fillMaxWidth().height(34.dp).padding(horizontal = 6.dp).align(Alignment.TopCenter))
         }
     }
 }
@@ -271,19 +271,19 @@ private fun blade(world: BladeWorld, p: P, field: IntSize) {
 
 /** A sliced watermelon with the count in gold, and three ✕ that turn red as fruit falls. */
 @Composable
-private fun Hud(tm: TextMeasurer, world: BladeWorld, scale: Double, modifier: Modifier) {
+private fun Hud(tm: TextMeasurer, sliced: Int, target: Int, misses: Int, scale: Double, modifier: Modifier) {
     Row(modifier.padding(horizontal = (14 * scale).dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy((8 * scale).dp)) {
         Canvas(Modifier.size((40 * scale).dp)) {
             translate(size.width / 2, size.height * 0.56f) { rotate(-24f, Offset.Zero) { drawHalf(0, size.width * 0.42, 1.0) } }
         }
-        Canvas(Modifier.size((110 * scale).dp, (40 * scale).dp)) { scoreText(tm, "${world.sliced}/${world.target}", 30 * scale * density) }
+        Canvas(Modifier.size((110 * scale).dp, (40 * scale).dp)) { scoreText(tm, "$sliced/$target", 30 * scale * density) }
         Spacer(Modifier.weight(1f))
         Canvas(Modifier.size((88 * scale).dp, (30 * scale).dp)) {
             var x = size.width.toDouble()
             for (i in (MAX_MISSES - 1) downTo 0) {
                 val s = size.height * listOf(0.58, 0.78, 1.0)[min(2, i)]
                 x -= s * 0.5
-                cross(x, size.height / 2.0, s, i < world.misses)
+                cross(x, size.height / 2.0, s, i < misses)
                 x -= s * 0.5 + 3 * density
             }
         }

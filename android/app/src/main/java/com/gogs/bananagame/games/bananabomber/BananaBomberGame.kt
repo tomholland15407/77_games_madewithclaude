@@ -22,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -111,7 +112,8 @@ private class BomberWorld(val level: Int, val isDemo: Boolean) {
     var blast = setOf<Cell>()
     var blastTimer = 0.0
     var player = Cell(1, 1)
-    var moveDir: Cell? = null
+    // Snapshot state, so the keys re-light when the demo script (or a finger) changes them.
+    var moveDir by mutableStateOf<Cell?>(null)
     var moveAcc = 0.0; var enemyAcc = 0.0
     var timeLeft = timeLimit
     var onWin: () -> Unit = {}
@@ -353,7 +355,7 @@ private fun BananaBomberView(level: Int, onWin: () -> Unit, onFail: () -> Unit) 
 /** A dark slate d-pad key (banana yellow while held). */
 @Composable
 private fun DirKey(world: BomberWorld, d: Cell, icon: ImageVector, isDemo: Boolean) {
-    val lit = world.moveDir == d && (isDemo || world.playing)
+    val lit = isDemo && world.moveDir == d      // as on iOS, only the demo's presses light up
     Box(
         Modifier.scale(if (lit) 0.9f else 1f).size(if (isDemo) 46.dp else 56.dp, if (isDemo) 32.dp else 46.dp)
             .then(if (isDemo) Modifier else Modifier.pressDown(

@@ -21,6 +21,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -302,7 +303,9 @@ private class MirrorWorld(val level: Int) {
     var polys = listOf<List<P>>()
     var px = 1.5; var py = 1.5
     var exit = (ROWS - 2) * COLS + COLS - 2
-    var mdx = 0.0; var mdy = 0.0
+    // Snapshot state, so the keys re-light when the demo script (or a finger) changes them.
+    var mdx by mutableDoubleStateOf(0.0)
+    var mdy by mutableDoubleStateOf(0.0)
     var timeLeft = timeLimit
     var onWin: () -> Unit = {}
     var onFail: () -> Unit = {}
@@ -480,7 +483,7 @@ private fun MirrorMazeView(level: Int, onWin: () -> Unit, onFail: () -> Unit) {
 /** Steel d-pad keys (banana yellow while held). */
 @Composable
 private fun MMKey(world: MirrorWorld, dx: Double, dy: Double, icon: ImageVector, isDemo: Boolean, w: Dp, h: Dp) {
-    val lit = world.mdx == dx && world.mdy == dy && (isDemo || world.playing)
+    val lit = isDemo && world.mdx == dx && world.mdy == dy      // as on iOS, only the demo's presses light up
     val radius = if (isDemo) 9.0 else 14.0
     Box(
         Modifier.scale(if (lit) 0.92f else 1f).size(w, h)

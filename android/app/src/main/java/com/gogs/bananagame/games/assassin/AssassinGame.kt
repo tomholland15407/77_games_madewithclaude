@@ -418,7 +418,7 @@ private fun AssassinView(level: Int, onWin: () -> Unit, onFail: () -> Unit) {
         verticalArrangement = Arrangement.spacedBy(if (isDemo) 6.dp else 8.dp)
     ) {
         tick; demoTick
-        if (!isDemo) Hud(world)
+        if (!isDemo) Hud(world.enemies.size, world.alarmRaised, world.ammo, if (world.maxTime > 0) world.timeLeft / world.maxTime else 0.0)
         Canvas(
             Modifier.fillMaxWidth().weight(1f).padding(horizontal = 12.dp)
                 .graphicsLayer {
@@ -450,23 +450,21 @@ private fun AssassinView(level: Int, onWin: () -> Unit, onFail: () -> Unit) {
 
 /** Targets left / alarm / ammo and the clock. */
 @Composable
-private fun Hud(world: AssassinWorld) {
+private fun Hud(n: Int, alarmRaised: Boolean, ammo: Int, frac: Double) {
     Column(verticalArrangement = Arrangement.spacedBy(7.dp)) {
         Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             Icon(Icons.Filled.GpsFixed, null, tint = rgb(0.95, 0.3, 0.28), modifier = Modifier.size(17.dp))
-            val n = world.enemies.size
             Text(if (n == 0) L("ALL TARGETS DOWN", "ĐÃ HẠ HẾT MỤC TIÊU") else L("$n target${if (n == 1) "" else "s"} left", "còn $n mục tiêu"),
                 style = ts(17.0, FontWeight.Black))
-            if (world.alarmRaised && n > 0) {
+            if (alarmRaised && n > 0) {
                 Text(L("ALARM", "BÁO ĐỘNG"), style = ts(13.0, FontWeight.Black),
                     modifier = Modifier.background(rgb(0.9, 0.15, 0.17), RoundedCornerShape(50)).border(2.dp, Color.Black, RoundedCornerShape(50))
                         .padding(horizontal = 8.dp, vertical = 3.dp))
             }
             Spacer(Modifier.weight(1f))
             Icon(Icons.Filled.Circle, null, tint = rgb(0.95, 0.78, 0.3), modifier = Modifier.size(6.dp))
-            Text(L("AMMO ${world.ammo}", "ĐẠN ${world.ammo}"), style = ts(15.0, FontWeight.Black, if (world.ammo <= 3) rgb(1.0, 0.35, 0.3) else Color.White))
+            Text(L("AMMO $ammo", "ĐẠN $ammo"), style = ts(15.0, FontWeight.Black, if (ammo <= 3) rgb(1.0, 0.35, 0.3) else Color.White))
         }
-        val frac = if (world.maxTime > 0) world.timeLeft / world.maxTime else 0.0
         TimeBar(frac, Modifier.fillMaxWidth().padding(horizontal = 44.dp).height(6.dp),
             fill = if (frac < 0.3) rgb(0.95, 0.25, 0.22) else rgb(0.95, 0.78, 0.3), track = Color.White.op(0.12))
     }

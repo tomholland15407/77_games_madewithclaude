@@ -34,6 +34,11 @@ The iOS sources are untouched; everything lives in `android/`.
 - `ScrollView` paging feed → `VerticalPager`; sheets → full-screen slide-up overlays; the manual's
   `fullScreenCover` → a full-screen `Dialog`.
 - Live manual demos (`\.isDemo`) → `LocalIsDemo` composition local; each game runs its scripted demo.
+- Strong skipping (on by default in Kotlin 2.x) skips a composable whose arguments are unchanged, and a
+  mutable game object compares by identity. So a sub-composable that receives the world and reads its
+  plain fields (a HUD, a key that lights up) never redraws. Pass the changing values as parameters,
+  make the fields snapshot state, or read the frame-tick `State` inside. A parameter the body never
+  reads is left out of the skip check, so passing an unused tick doesn't help.
 
 ## Names
 
@@ -136,6 +141,7 @@ Status legend: done = rules, levels, art and demo ported.
 67. Tile Trio (`tile-trio`): done — Tile Master look (teal backdrop, cream mahjong tiles on green bases with FruitArt fruit, covered tiles dimmed, wooden 7-slot tray, trios slide together and pop with a burst), same layered-pyramid generator with the guaranteed uncovering order, tiles ease between board and tray, scripted 12-tap demo; unit tests check every level's tile count/trios and the Pipe Flow demo.
 68. Fruit Tumble (`fruit-merge`, locksFeed): done — Suika look (cream tub with a wooden rim on a peach backdrop, FruitArt fruit with faces pre-rendered once per tier and stamped rotated, aim guide, flashing danger line, juice splashes, evolution strip, GOAL/NEXT bubbles), same position-based physics (10 substeps, friction, merges) at fixed 1/60 s, touchDrag aiming, scripted demo; a unit test confirms the demo's chain ends in a pear.
 69. Landing Lines (`flight-control`, locksFeed): done — Flight Control airfield (mown grass, patches, trees, painted runways with piano keys / dashed centre lines / approach chevrons / dashed landing discs, helipad; cached to a bitmap), cartoon top-down jets, props and helicopters with ground shadows and spinning blades, dotted routes, blinking arrival chevrons, proximity rings, crash bursts, FlightLand HUD icon; same spawn / route-lock / landing / collision rules at fixed 1/60 s, touchDrag routes, scripted two-landing demo.
+70. Cat Burglar (`cat-burglar`): done (deferred batch) — night mansion (parquet, moonlight, soft shadow pools, plum walls with gold molding, furniture on every cover block, guard doors; cached to a bitmap redrawn only when the alarm or the exit lock changes), coin stacks, guard dogs in caps with flashlight cones and "!" bubbles, a masked tabby that fades on shadow tiles, reinforcement swarm and tracers on the alarm, same generator via BoardCache prefetch, same patrol / chase / fire rules, scripted demo; unit tests check every level's board and that the demo loots everything unseen and escapes.
 
 (The feed-order pass is complete: 69 of 77 games. The 8 deferred games below are added to this list as they are ported.)
 
@@ -171,6 +177,15 @@ iOS source (rules, tuning numbers, demo scripts, art) and fix any drift:
 - Tunnel Pump (`dig-dug`)
 - Mirror Maze (`mirror-maze`) — 839 Swift lines, intricate generator
 - (any later port over ~850 lines of Swift is added here as it lands)
+
+Review findings so far (fixed):
+
+- A strong-skipping sweep of every sub-composable that receives a game object found frozen
+  displays: the Turbo Racer HUD (TIME, %, km/h) and its demo steer keys, the Assassin HUD (targets,
+  alarm, ammo, clock), the Header Duel scoreboard (score and clock), the Juice Blade HUD (sliced
+  count and misses), the Breach button (never greyed out with no charges left), and the demo d-pads
+  of Decoy, Mirror Maze, Guard Patrol, Banana Bomber and Tunnel Pump. They now take plain values or
+  read snapshot state. On iOS, only the demo's presses light those d-pads; the Android keys match.
 
 ## Behaviour differences
 
