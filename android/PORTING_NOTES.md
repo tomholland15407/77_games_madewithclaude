@@ -8,6 +8,9 @@ The iOS sources are untouched; everything lives in `android/`.
 - AGP 9.4.1 (built-in Kotlin), Kotlin 2.4.21 + Compose compiler plugin, Compose BOM 2026.09.00,
   Gradle 9.8.2 wrapper, compileSdk/targetSdk 37, minSdk 26, JDK 17 toolchain (run Gradle on JDK 17–21).
 - `./gradlew assembleDebug` builds `app/build/outputs/apk/debug/app-debug.apk`.
+- `./gradlew assemblePlaytest` builds `app/build/outputs/apk/playtest/app-playtest.apk`: the release
+  build (R8, no debug checks) signed with the debug key. Use it to judge speed on a phone: Compose
+  runs several times slower in a debug build, which felt like lag in scrolling, search and settings.
 - `./gradlew testDebugUnitTest` runs the pure-logic unit tests.
 - Test hooks (adb): `--es GOGS_START_GAME <game id>` skips the splash and opens that game;
   `--es GOGS_FAKE_STORE_VERSION 9.9` (+ optional `GOGS_FAKE_STORE_NOTES`) fakes a newer store
@@ -62,7 +65,8 @@ phase and in `GameRegistry.all`, so they are ported too.
 
 - Splash (Return to … / Start Fresh): ported.
 - Feed (pager, filter menu + reshuffle, banana dropdown, per-mode remembered order/position,
-  genre-weighted shuffle, drop-out advance, skip button for feed-locking games, end page,
+  genre-weighted shuffle, drop-out advance, skip button for feed-locking games (the pager isn't
+  locked; see Behaviour differences), end page,
   pull-to-reshuffle): ported.
 - Game page (countdown, win/fail overlays, reward burst, level, favorite, manual): ported.
 - Manual (live demo + bullets): ported.
@@ -194,6 +198,23 @@ Fixed in the review:
 - Sounds overlap (SoundPool mixes) where AVAudioPlayerNode queued them back to back.
 - Safe-area: like iOS (whose feed reads zero insets), pages floor the top at 60dp and the controls
   sit 16dp from the top; on phones with a tall cutout this matches the iOS layout.
+- System bars: the status bar and the navigation bar (gesture pill or 3-button bar) are both hidden,
+  in the activity and in the manual's dialog, so nothing covers a game's bottom controls; a swipe
+  from an edge shows them for a moment, and they're hidden again whenever the app regains focus.
+- Screen size (`ui/FitToDesign.kt`): the layouts were designed on a 393 × 852 pt iPhone. On a phone
+  smaller than 393 × 852 dp the whole UI is scaled down (density × k, k = the smaller ratio, never
+  below 0.5) so every game shows in its entirety; bigger phones keep their density. The system font
+  scale is ignored for the same reason (game text is sized to the art). The manual's Dialog gets its
+  own density, so it's wrapped too.
+- Feed lock: iOS locks the pager while a `locksFeed` game plays. Here the pager stays scrollable:
+  every `locksFeed` game's play area consumes its own drags (`touchDrag` / `pressDown`), so a swipe
+  outside it (HUD, top and bottom margins) leaves the game mid-play. The skip button is kept.
+- Overlays (sheets, win/fail, the manual's demo) swallow touches without consuming them, so taps
+  on their own buttons (Done, settings rows, search results, Next) always register. The win
+  overlay's Next acts once (a second tap while it fades no longer skips a level), and the countdown
+  starts on the same frame the level changes.
+- Mascot: the 🍌 emoji is drawn as a vector banana (`core/Mascot.kt`) in Apple's bright yellow,
+  because Android emoji fonts draw a duller, browner banana; the launcher icon matches.
 
 ## Needs manual testing on a device
 

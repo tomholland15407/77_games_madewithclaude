@@ -1,5 +1,6 @@
 package com.gogs.bananagame.ui
 
+import com.gogs.bananagame.core.BananaMascot
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -237,7 +238,7 @@ fun StatsView(onDone: () -> Unit) {
             verticalArrangement = Arrangement.spacedBy(28.dp), horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(top = 8.dp)) {
-                Text("🍌", style = ts(52.0))
+                BananaMascot(Modifier.size(60.dp))
                 Spacer(Modifier.height(8.dp))
                 Text(L("UNROT YOUR BRAIN", "UNROT NÃO CỦA BẠN"), style = ts(22.0, FontWeight.Black, BananaTheme.banana, spacing = 2.0))
             }

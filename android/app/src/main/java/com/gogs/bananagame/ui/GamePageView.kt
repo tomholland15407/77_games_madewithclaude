@@ -1,5 +1,6 @@
 package com.gogs.bananagame.ui
 
+import com.gogs.bananagame.core.BananaMascot
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -81,7 +82,6 @@ fun GamePageView(
     isActive: Boolean,
     topInset: Dp,
     bottomInset: Dp,
-    onLockChange: (Boolean) -> Unit,
     onSkip: () -> Unit,
 ) {
     var level by remember { mutableIntStateOf(1) }
@@ -118,15 +118,6 @@ fun GamePageView(
         SoundManager.countdownGo()
     }
 
-    val shouldLock = isActive && game.locksFeed && !isCountingDown && !showReward && !showFail && !showManual
-    var lastLock by remember { mutableStateOf(false) }
-    LaunchedEffect(shouldLock) {
-        if (shouldLock != lastLock) {
-            lastLock = shouldLock
-            onLockChange(shouldLock)
-        }
-    }
-
     val handleWin = rememberUpdatedState {
         if (!showReward && !showFail) {
             Haptics.success()
@@ -149,6 +140,8 @@ fun GamePageView(
             scope.launch {
                 delay(1400)
                 level = 1
+                isCountingDown = true
+                countdownValue = 3
                 runID += 1
                 showFail = false
             }
@@ -215,9 +208,14 @@ fun GamePageView(
             Box(Modifier.fillMaxSize()) {
                 RewardBurstView()
                 CompletionOverlay(level, isLastLevel) {
-                    level = if (isLastLevel) 1 else level + 1
-                    runID += 1
-                    showReward = false
+                    // The overlay stays tappable while it fades out: advance only once.
+                    if (showReward) {
+                        level = if (isLastLevel) 1 else level + 1
+                        isCountingDown = true
+                        countdownValue = 3
+                        runID += 1
+                        showReward = false
+                    }
                 }
             }
         }
@@ -229,9 +227,12 @@ fun GamePageView(
             onDismissRequest = { showManual = false; if (isActive) { showReward = false; showFail = false; runID += 1 } },
             properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = false)
         ) {
-            GameManualView(game, game.manual) {
-                showManual = false
-                if (isActive) { showReward = false; showFail = false; runID += 1 }
+            HideDialogSystemBars()
+            FitToDesign {
+                GameManualView(game, game.manual) {
+                    showManual = false
+                    if (isActive) { showReward = false; showFail = false; runID += 1 }
+                }
             }
         }
     }
@@ -245,9 +246,14 @@ fun HeaderCircle(padding: Dp = 8.dp, onClick: () -> Unit, content: @Composable (
     ) { content() }
 }
 
-/** Swallows every touch (the iOS overlays sit over a `.disabled` game). */
+/**
+ * Makes an overlay or sheet the touch target for everything under it (the iOS overlays sit over a
+ * `.disabled` game). It doesn't consume anything: Compose hit-tests overlapping siblings top-down and
+ * stops at the first one with pointer input, so whatever lies beneath gets nothing, while the overlay's
+ * own buttons keep working. (Consuming here cancelled any tap whose finger moved a hair.)
+ */
 fun Modifier.blockTouches(): Modifier = pointerInput(Unit) {
-    awaitPointerEventScope { while (true) { awaitPointerEvent().changes.forEach { it.consume() } } }
+    awaitPointerEventScope { while (true) awaitPointerEvent() }
 }
 
 @Composable
@@ -302,12 +308,12 @@ fun RewardBurstView() {
         val count = 16
         for (i in 0 until count) {
             val angle = i.toDouble() / count * 2 * Math.PI
-            Text(
-                "🍌", style = ts(32.0),
-                modifier = Modifier
+            BananaMascot(
+                Modifier
                     .offset(x = (cos(angle) * 190 * t.value).dp, y = (sin(angle) * 190 * t.value).dp)
                     .scale(0.3f + t.value)
                     .alpha(1f - t.value)
+                    .size(36.dp)
             )
         }
     }

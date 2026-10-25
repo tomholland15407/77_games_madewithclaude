@@ -1,5 +1,6 @@
 package com.gogs.bananagame.ui
 
+import com.gogs.bananagame.core.BananaMascot
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.animateFloatAsState
@@ -108,7 +109,6 @@ fun FeedView(initialGameID: String?) {
     val orders = remember { mutableStateMapOf<FeedFilter, List<GameDefinition>>() }
     val savedCurrent = remember { mutableStateMapOf<FeedFilter, String>() }
     var currentGameID by remember { mutableStateOf<String?>(null) }
-    var isPagingLocked by remember { mutableStateOf(false) }
     var showSearch by remember { mutableStateOf(false) }
     var showSettings by remember { mutableStateOf(false) }
     var showStats by remember { mutableStateOf(false) }
@@ -295,7 +295,6 @@ fun FeedView(initialGameID: String?) {
             } else if (cur == null) {
                 currentGameID = displayedIds.firstOrNull()
             } else if (cur !in displayedIds) {
-                isPagingLocked = false
                 val oldIdx = oldIds.indexOf(cur)
                 currentGameID = if (oldIdx >= 0) {
                     oldIds.drop(oldIdx + 1).firstOrNull { it in displayedIds }
@@ -305,9 +304,8 @@ fun FeedView(initialGameID: String?) {
         }
     }
 
-    // Remember the on-screen game; any navigation releases a stale paging lock.
+    // Remember the on-screen game.
     LaunchedEffect(currentGameID) {
-        isPagingLocked = false
         val id = currentGameID
         if (id != null && id != END_ID) {
             AppSettings.lastGameID = id
@@ -391,7 +389,10 @@ fun FeedView(initialGameID: String?) {
                 VerticalPager(
                     state = pagerState,
                     modifier = Modifier.fillMaxSize().nestedScroll(connection),
-                    userScrollEnabled = !isPagingLocked,
+                    // Never locked: drag games claim the swipes inside their play area (their drag
+                    // handlers consume them), so a swipe anywhere else still moves to the next game,
+                    // even mid-play. Feed-locking games keep their skip button too.
+                    userScrollEnabled = true,
                     beyondViewportPageCount = 0,
                     key = { pageIdsState.value.getOrElse(it) { "x$it" } },
                 ) { page ->
@@ -407,7 +408,6 @@ fun FeedView(initialGameID: String?) {
                             isActive = currentGameID == game.id && isAttendingFeed && pagerState.settledPage == page,
                             topInset = topInset,
                             bottomInset = bottomInset,
-                            onLockChange = { locked -> if (currentGameID == game.id) isPagingLocked = locked },
                             onSkip = { skipToNext() },
                         )
                     }
@@ -459,7 +459,7 @@ fun FeedView(initialGameID: String?) {
                         Haptics.tap(); SoundManager.tap()
                     },
                     contentAlignment = Alignment.Center
-                ) { Text("🍌", style = ts(22.0), modifier = Modifier.rotate(spin)) }
+                ) { BananaMascot(Modifier.size(26.dp).rotate(spin)) }
                 AnimatedVisibility(menuOpen, enter = fadeIn() + slideInVertically { -it / 2 }, exit = fadeOut() + slideOutVertically { -it / 2 }) {
                     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                         MenuIcon(Icons.Filled.BarChart, L("Stats", "Thống kê")) { menuOpen = false; showStats = true }
@@ -504,7 +504,7 @@ private fun EmptyState(filter: FeedFilter) {
         FeedFilter.ALL -> L("All genres are turned off. Enable one in Settings.", "Tất cả thể loại đã tắt. Bật một thể loại trong Cài đặt.")
     }
     Column(Modifier.fillMaxSize().padding(40.dp), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-        Text("🍌", style = ts(64.0))
+        BananaMascot(Modifier.size(72.dp))
         Spacer(Modifier.height(14.dp))
         Text(title, style = ts(22.0, FontWeight.Bold))
         Spacer(Modifier.height(14.dp))
@@ -523,7 +523,7 @@ private fun PullBanana(progress: Float, topInset: androidx.compose.ui.unit.Dp) {
                 drawArc(if (armed) Color.Green else BananaTheme.banana, -90f, 360f * progress.coerceAtMost(1f), false,
                     topLeft = Offset(sw / 2, sw / 2), size = Size(size.width - sw, size.height - sw), style = Stroke(sw, cap = StrokeCap.Round))
             }
-            Text("🍌", style = ts(30.0), modifier = Modifier.rotate(progress * 360f))
+            BananaMascot(Modifier.size(34.dp).rotate(progress * 360f))
         }
     }
 }
@@ -536,7 +536,7 @@ private fun FeedEndPage(topInset: androidx.compose.ui.unit.Dp, bottomInset: andr
         verticalArrangement = Arrangement.spacedBy(26.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("🍌", style = ts(60.0))
+        BananaMascot(Modifier.size(68.dp))
         Text(L("You've reached the end", "Bạn đã đến cuối"), style = ts(24.0, FontWeight.Black), textAlign = TextAlign.Center)
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             EndStat(L("STREAK", "CHUỖI"), "${StatsStore.currentStreak}", BananaTheme.banana, Modifier.weight(1f))

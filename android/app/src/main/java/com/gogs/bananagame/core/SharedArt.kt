@@ -146,9 +146,10 @@ fun BrainstormingView(skyTop: Color, skyBottom: Color) {
                 Text(L("Even Elon Musk has to think!", "Ngay cả Elon Musk cũng phải suy nghĩ!"),
                     style = ts(16.0, FontWeight.SemiBold, Color.White.op(0.75)), textAlign = TextAlign.Center)
             }
-            Text("🍌", style = ts(54.0), modifier = Modifier
-                .offset { IntOffset((x.value - 27.dp.toPx()).roundToInt(), (y.value - 36.dp.toPx()).roundToInt()) }
-                .rotate(rot.value))
+            BananaMascot(Modifier
+                .offset { IntOffset((x.value - 30.dp.toPx()).roundToInt(), (y.value - 30.dp.toPx()).roundToInt()) }
+                .rotate(rot.value)
+                .size(60.dp))
         }
     }
 }

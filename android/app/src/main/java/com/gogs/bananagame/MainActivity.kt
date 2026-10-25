@@ -6,9 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import com.gogs.bananagame.core.AppSettings
 import com.gogs.bananagame.core.BananaTheme
 import com.gogs.bananagame.core.FavoritesStore
@@ -18,7 +15,9 @@ import com.gogs.bananagame.core.Prefs
 import com.gogs.bananagame.core.ProgressStore
 import com.gogs.bananagame.core.SoundManager
 import com.gogs.bananagame.core.StatsStore
+import com.gogs.bananagame.ui.FitToDesign
 import com.gogs.bananagame.ui.RootView
+import com.gogs.bananagame.ui.hideSystemBars
 import com.gogs.bananagame.ui.UpdateChecker
 
 /** The app's entry point (iOS `BananaGameApp`): initialises the shared services, then shows RootView. */
@@ -26,11 +25,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        // Fully immersive, TikTok-style: the status bar is hidden (swipe reveals it transiently).
-        WindowCompat.getInsetsController(window, window.decorView).apply {
-            hide(WindowInsetsCompat.Type.statusBars())
-            systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-        }
+        // Fully immersive, TikTok-style: the status and navigation bars are hidden, so nothing covers
+        // the games (a swipe from the edge reveals them transiently).
+        hideSystemBars(window)
         Prefs.init(this)
         Localization.init()
         FavoritesStore.init()
@@ -46,8 +43,14 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MaterialTheme(colorScheme = darkColorScheme(primary = BananaTheme.banana, background = BananaTheme.background, surface = BananaTheme.background)) {
-                RootView()
+                FitToDesign { RootView() }
             }
         }
+    }
+
+    /** The bars come back after a dialog, the notification shade or another app: hide them again. */
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) hideSystemBars(window)
     }
 }

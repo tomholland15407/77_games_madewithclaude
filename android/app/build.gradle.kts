@@ -21,6 +21,13 @@ android {
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+        // A release build (R8, no debug checks: Compose runs several times faster than in debug)
+        // signed with the debug key, so it installs straight onto a phone for playtesting.
+        create("playtest") {
+            initWith(getByName("release"))
+            signingConfig = signingConfigs.getByName("debug")
+            matchingFallbacks += "release"
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

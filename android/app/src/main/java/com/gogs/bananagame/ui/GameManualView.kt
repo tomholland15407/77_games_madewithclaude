@@ -55,8 +55,12 @@ fun GameManualView(game: GameDefinition, manual: GameManual, onClose: () -> Unit
                     Modifier.fillMaxWidth().height(340.dp).clip(RoundedCornerShape(16.dp))
                         .background(BananaTheme.background)
                         .border(1.dp, Color.White.op(0.10), RoundedCornerShape(16.dp))
-                        .blockTouches()
-                ) { LiveDemoView(game) }
+                ) {
+                    LiveDemoView(game)
+                    // A clear lid over the demo: it takes the touches (so the demo can't be played) without
+                    // consuming them, so the manual still scrolls when the finger starts on the demo.
+                    Box(Modifier.matchParentSize().blockTouches())
+                }
             }
             Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
                 Text(L("HOW TO PLAY", "CÁCH CHƠI"), style = ts(15.0, FontWeight.ExtraBold, Color.White.op(0.55), spacing = 2.0))

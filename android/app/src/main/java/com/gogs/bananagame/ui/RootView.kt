@@ -1,5 +1,7 @@
 package com.gogs.bananagame.ui
 
+import androidx.compose.foundation.layout.size
+import com.gogs.bananagame.core.BananaMascot
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -85,10 +87,7 @@ fun SplashView(resumeGame: GameDefinition?, onResume: () -> Unit, onStart: () ->
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            "🍌", style = ts(96.0),
-            modifier = Modifier.scale(0.5f + 0.5f * pop.value).rotate(360f * pop.value)
-        )
+        BananaMascot(Modifier.size(110.dp).scale(0.5f + 0.5f * pop.value).rotate(360f * pop.value))
         Spacer(Modifier.height(16.dp))
         Text("GAME OF GAMES", style = ts(34.0, FontWeight.Black), textAlign = TextAlign.Center)
         Spacer(Modifier.height(16.dp))
