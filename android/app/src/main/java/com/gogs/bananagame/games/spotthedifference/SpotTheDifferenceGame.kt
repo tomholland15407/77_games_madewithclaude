@@ -33,8 +33,6 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.clipPath
-import androidx.compose.ui.graphics.vector.VectorPainter
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
 import com.gogs.bananagame.core.*
 import kotlinx.coroutines.delay
@@ -98,8 +96,8 @@ private fun SpotTheDifferenceView(level: Int, onWin: () -> Unit, onFail: () -> U
     var circled by remember { mutableStateOf(false) }
     var missAt by remember { mutableStateOf<P?>(null) }
     val icons = listOf(Icons.Filled.Park, Icons.Filled.Cloud, Icons.Filled.WbSunny, Icons.Filled.Eco, Icons.Filled.EmojiNature,
-        Icons.Filled.Landscape, Icons.Filled.BugReport, Icons.Filled.Spa, Icons.Filled.SetMeal, Icons.Filled.Pets).map { rememberVectorPainter(it) }
-    val check = rememberVectorPainter(Icons.Filled.Check)
+        Icons.Filled.Landscape, Icons.Filled.BugReport, Icons.Filled.Spa, Icons.Filled.SetMeal, Icons.Filled.Pets).map { rememberVectorIcon(it) }
+    val check = rememberVectorIcon(Icons.Filled.Check)
     val handP = rememberHand()
     val ringAnim by animateFloatAsState(if (circled || (isDemo && demoRing)) 1f else 0f, spring(dampingRatio = 0.7f), label = "ring")
     val fingerAnim by animateFloatAsState(if (demoCrosshair) 1f else 0f, spring(dampingRatio = 0.7f), label = "finger")
@@ -207,7 +205,7 @@ private fun SpotTheDifferenceView(level: Int, onWin: () -> Unit, onFail: () -> U
 private fun hash(n: Double): Double { val v = sin(n * 12.9898) * 43758.5453; return v - kotlin.math.floor(v) }
 
 /** One framed picture: a painted sky-and-meadow with every item as an ink-outlined sticker. */
-private fun DrawScope.picture(r: DoubleArray, items: List<SceneItem>, icons: List<VectorPainter>) {
+private fun DrawScope.picture(r: DoubleArray, items: List<SceneItem>, icons: List<VectorIcon>) {
     val u = density.toDouble()
     val (x, y, w, h) = listOf(r[0], r[1], r[2], r[3])
     blurRRect(x - 3 * u, y - 3 * u + 3 * u, w + 6 * u, h + 6 * u, 16 * u, Color.Black.op(0.25), 6 * u)
@@ -222,9 +220,7 @@ private fun DrawScope.picture(r: DoubleArray, items: List<SceneItem>, icons: Lis
             val bx = x + item.pos.x * w - s / 2; val by = y + item.pos.y * h - s / 2
             val p = icons[item.symbol]
             icon(p, bx + 1.5 * u, by + 2.5 * u, s, Color.Black.op(0.22))
-            val o = max(1.2 * u, s * 0.045)
-            for ((dx, dy) in listOf(-o to 0.0, o to 0.0, 0.0 to -o, 0.0 to o, -o * 0.7 to -o * 0.7, o * 0.7 to -o * 0.7, -o * 0.7 to o * 0.7, o * 0.7 to o * 0.7))
-                icon(p, bx + dx, by + dy, s, ink)
+            iconOutline(p, bx, by, s, ink, max(1.2 * u, s * 0.045))
             icon(p, bx, by, s, item.color)
         }
     }
@@ -288,7 +284,7 @@ private fun DrawScope.pencil(width: Double, h: Double, frac: Double) {
     fillPath(polyPath(tx + tipLen * 0.62, midY - h * 0.19, tx + tipLen, midY, tx + tipLen * 0.62, midY + h * 0.19), gray(0.2))
 }
 
-private fun DrawScope.foundBadge(cx: Double, cy: Double, r: Double, found: Boolean, check: VectorPainter) {
+private fun DrawScope.foundBadge(cx: Double, cy: Double, r: Double, found: Boolean, check: VectorIcon) {
     val u = density.toDouble()
     circle(cx, cy, r, if (found) rgb(0.2, 0.72, 0.3) else Color.White.op(0.85))
     circleStroke(cx, cy, r - u, if (found) rgb(0.1, 0.45, 0.16) else rgb(0.7, 0.5, 0.3), 2 * u)

@@ -26,7 +26,6 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotateRad
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.font.FontWeight
@@ -261,7 +260,7 @@ private fun LandingLinesView(level: Int, onWin: () -> Unit, onFail: () -> Unit) 
     val world = remember { AirWorld(level) }
     val tm = rememberTextMeasurer()
     val handP = rememberHand()
-    val landP = rememberVectorPainter(Icons.Filled.FlightLand)
+    val landP = rememberVectorIcon(Icons.Filled.FlightLand)
     val demo = remember { object { var finger: P? = null } }
     val tick by rememberFrameLoop()
 
@@ -361,7 +360,7 @@ private fun LandingLinesView(level: Int, onWin: () -> Unit, onFail: () -> Unit) 
     }
 }
 
-private fun DrawScope.hud(world: AirWorld, tm: TextMeasurer, landP: androidx.compose.ui.graphics.vector.VectorPainter, isDemo: Boolean) {
+private fun DrawScope.hud(world: AirWorld, tm: TextMeasurer, landP: VectorIcon, isDemo: Boolean) {
     val u = density.toDouble(); val w = size.width.toDouble()
     var y = (if (isDemo) 8 else 12) * u
     if (!isDemo) {

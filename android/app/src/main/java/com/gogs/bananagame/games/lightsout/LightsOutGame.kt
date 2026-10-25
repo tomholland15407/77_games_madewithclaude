@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.drawscope.translate
-import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
@@ -337,7 +336,7 @@ private fun DrawScope.menuKeys(r: Rc) {
 }
 
 /** The key grid: bloom, keys, the victory chase round the rim, and the demo finger. */
-private fun DrawScope.keypad(grid: BooleanArray, n: Int, pulse: Int, finger: Boolean, chaseStart: Double?, cell: Double, spacing: Double, handP: VectorPainter) {
+private fun DrawScope.keypad(grid: BooleanArray, n: Int, pulse: Int, finger: Boolean, chaseStart: Double?, cell: Double, spacing: Double, handP: VectorIcon) {
     val count = n * n
     fun rect(i: Int) = Rc((i % n) * (cell + spacing), (i / n) * (cell + spacing), cell, cell)
     val chase = DoubleArray(count)

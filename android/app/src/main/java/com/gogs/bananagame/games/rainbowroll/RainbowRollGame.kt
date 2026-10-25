@@ -26,8 +26,6 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.vector.VectorPainter
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
 import com.gogs.bananagame.core.*
 import kotlinx.coroutines.delay
@@ -170,7 +168,7 @@ private fun RainbowRollView(level: Int, onWin: () -> Unit, onFail: () -> Unit) {
     var demoSide by remember { mutableDoubleStateOf(0.0) }
     var demoTapT by remember { mutableDoubleStateOf(-10.0) }
     var demoTick by remember { mutableIntStateOf(0) }
-    val sign = rememberVectorPainter(Icons.Filled.Sync)
+    val sign = rememberVectorIcon(Icons.Filled.Sync)
     val handP = rememberHand()
     val stars = remember { Starfield(50) }
     val tick by rememberFrameLoop { dt -> if (!isDemo) world.step(dt) }
@@ -257,7 +255,7 @@ private class Proj(val w: Double, val h: Double) {
 
 private fun quad(a: P, b: P, c: P, d: P) = polyPath(listOf(a, b, c, d))
 
-private fun DrawScope.course(world: RollWorld, sign: VectorPainter) {
+private fun DrawScope.course(world: RollWorld, sign: VectorIcon) {
     val w = size.width.toDouble(); val h = size.height.toDouble()
     val pr = Proj(w, h)
     track(pr, world.distance)
@@ -326,7 +324,7 @@ private fun DrawScope.cubes(pr: Proj, color: Color, lo: Double, hi: Double, dz: 
 }
 
 /** A paint gate: a glowing strip, two posts and a bar with a swap sign. */
-private fun DrawScope.gate(pr: Proj, color: Color, dz: Double, sign: VectorPainter) {
+private fun DrawScope.gate(pr: Proj, color: Color, dz: Double, sign: VectorIcon) {
     val u = density.toDouble()
     fillPath(quad(pr.p(LANE_LO, dz + 0.02), pr.p(LANE_HI, dz + 0.02), pr.p(LANE_HI, dz - 0.02), pr.p(LANE_LO, dz - 0.02)), color.op(0.9))
     val k = (pr.x(1.0, dz) - pr.x(0.0, dz)) / max(1.0, pr.x(1.0, 0.0) - pr.x(0.0, 0.0))

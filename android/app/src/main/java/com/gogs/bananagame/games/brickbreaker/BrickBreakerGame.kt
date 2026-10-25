@@ -40,8 +40,6 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.vector.VectorPainter
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.gogs.bananagame.core.*
@@ -331,7 +329,7 @@ private fun BrickBreakerView(level: Int, onWin: () -> Unit, onFail: () -> Unit) 
         world.step(dt)
     }
     val icons = listOf(Icons.Filled.LooksTwo, Icons.Filled.Looks3, Icons.Filled.LocalFireDepartment, Icons.Filled.AcUnit,
-        Icons.Filled.SwapHoriz, Icons.Filled.SlowMotionVideo, Icons.Filled.Bolt).map { rememberVectorPainter(it) }
+        Icons.Filled.SwapHoriz, Icons.Filled.SlowMotionVideo, Icons.Filled.Bolt).map { rememberVectorIcon(it) }
     val handP = rememberHand()
     var cardSize by remember { mutableStateOf(androidx.compose.ui.unit.IntSize.Zero) }
     val dens = androidx.compose.ui.platform.LocalDensity.current.density.toDouble()
@@ -429,7 +427,7 @@ private fun DrawScope.gauge(f: Double) {
         vgrad(if (f < 0.3) listOf(rgb(1.0, 0.45, 0.35), rgb(0.8, 0.12, 0.1)) else listOf(hudYellow.lit(0.3), hudYellow.shade(0.15)), 0.0, h))
 }
 
-private fun DrawScope.drawAction(world: BreakerWorld, w: Double, h: Double, icons: List<VectorPainter>) {
+private fun DrawScope.drawAction(world: BreakerWorld, w: Double, h: Double, icons: List<VectorIcon>) {
     val u = density.toDouble()
     for (b in world.bolts) {
         val x = b.x * w - 2.5 * u; val y = b.y * h - 10 * u
@@ -468,7 +466,7 @@ private fun DrawScope.brick(x: Double, y: Double, w: Double, h: Double, base: Co
 }
 
 /** A glossy pill capsule carrying the power-up's icon. */
-private fun DrawScope.capsule(cx: Double, cy: Double, color: Color, icon: VectorPainter) {
+private fun DrawScope.capsule(cx: Double, cy: Double, color: Color, icon: VectorIcon) {
     val u = density.toDouble()
     val x = cx - 18 * u; val y = cy - 11 * u; val w = 36 * u; val h = 22 * u
     rrect(x + 1.5 * u, y + 2.5 * u, w, h, h / 2, Color.Black.op(0.3))

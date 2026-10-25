@@ -32,7 +32,6 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.drawscope.translate
-import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.font.FontWeight
@@ -219,7 +218,7 @@ private object SimonArt {
         return p
     }
 
-    fun draw(d: DrawScope, tm: TextMeasurer, lit: Int?, watching: Boolean, count: Int, total: Int, finger: Int?, handP: VectorPainter) = with(d) {
+    fun draw(d: DrawScope, tm: TextMeasurer, lit: Int?, watching: Boolean, count: Int, total: Int, finger: Int?, handP: VectorIcon) = with(d) {
         val side = min(size.width, size.height).toDouble()
         if (side <= 20) return@with
         val g = geo(side)

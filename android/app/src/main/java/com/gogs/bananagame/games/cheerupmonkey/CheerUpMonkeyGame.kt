@@ -30,7 +30,6 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
@@ -631,7 +630,7 @@ private fun CheerUpMonkeyView(level: Int, onWin: () -> Unit, onFail: () -> Unit)
 
 /** The painted stage (cached to a bitmap) with the live scene on top, a ruled outline, and the demo finger. */
 @Composable
-private fun Scene(g: CMPlay, theme: Int, night: Boolean, isDemo: Boolean, tick: State<Long>, handP: VectorPainter, modifier: Modifier) {
+private fun Scene(g: CMPlay, theme: Int, night: Boolean, isDemo: Boolean, tick: State<Long>, handP: VectorIcon, modifier: Modifier) {
     val corner = if (isDemo) 8.dp else 12.dp
     val u = LocalDensity.current.density.toDouble()
     Canvas(
@@ -664,7 +663,7 @@ private fun Scene(g: CMPlay, theme: Int, night: Boolean, isDemo: Boolean, tick: 
  * every wheel as wide as one in the longer row and the shorter row centred.
  */
 @Composable
-private fun LockPanel(g: CMPlay, isDemo: Boolean, tick: State<Long>, handP: VectorPainter, modifier: Modifier) {
+private fun LockPanel(g: CMPlay, isDemo: Boolean, tick: State<Long>, handP: VectorIcon, modifier: Modifier) {
     g.ver
     val stage = g.stage
     val n = stage.wheels.size
@@ -707,7 +706,7 @@ private fun LockPanel(g: CMPlay, isDemo: Boolean, tick: State<Long>, handP: Vect
 @Composable
 private fun Wheel(
     hue: CMHue, count: Boolean, face: Int, open: Boolean, compact: Boolean, demoHand: Boolean, enabled: Boolean,
-    tick: State<Long>, handP: VectorPainter, g: CMPlay, modifier: Modifier, onTap: () -> Unit,
+    tick: State<Long>, handP: VectorIcon, g: CMPlay, modifier: Modifier, onTap: () -> Unit,
 ) {
     val (src, pressed) = rememberPressed()
     val down = pressed.value || demoHand

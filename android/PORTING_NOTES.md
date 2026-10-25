@@ -42,6 +42,9 @@ The iOS sources are untouched; everything lives in `android/`.
   plain fields (a HUD, a key that lights up) never redraws. Pass the changing values as parameters,
   make the fields snapshot state, or read the frame-tick `State` inside. A parameter the body never
   reads is left out of the skip check, so passing an unused tick doesn't help.
+- SF Symbols drawn inside a Canvas → Material icons as paths (`VectorIcon` in `core/SharedArt.kt`),
+  not `VectorPainter`: the painter caches one bitmap per size, so an icon drawn at several sizes in a
+  frame (Spot the Difference's stickers, Rainbow Roll's gate signs) flickered or came out cut off.
 
 ## Names
 

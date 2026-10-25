@@ -38,7 +38,6 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.drawscope.translate
-import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.gogs.bananagame.core.*
@@ -377,7 +376,7 @@ private fun GrooveSliderView(level: Int, onWin: () -> Unit, onFail: () -> Unit) 
     }
 }
 
-private fun DrawScope.demoPress(handP: VectorPainter, x: Double, y: Double, cell: Double) {
+private fun DrawScope.demoPress(handP: VectorIcon, x: Double, y: Double, cell: Double) {
     val i = cell * 0.05 + cell * 0.045
     rrect(x + i, y + i, cell - 2 * i, cell - 2 * i, cell * 0.1, Color.White.op(0.18))
     rrectStroke(x + i, y + i, cell - 2 * i, cell - 2 * i, cell * 0.1, Color.White, 3.0 * density)

@@ -33,11 +33,17 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.StrokeJoin
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.translate
-import androidx.compose.ui.graphics.vector.VectorPainter
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.VectorGroup
+import androidx.compose.ui.graphics.vector.VectorPath
+import androidx.compose.ui.graphics.vector.toPath
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
@@ -74,25 +80,52 @@ inline fun DrawScope.withAlpha(alpha: Double, block: DrawScope.() -> Unit) {
     }
 }
 
-/** The demo "finger": a white pointing hand with a soft shadow. Create the painter with [rememberHand]. */
-fun DrawScope.hand(painter: VectorPainter, x: Double, y: Double, s: Double) {
+/** The demo "finger": a white pointing hand with a soft shadow. Create the icon with [rememberHand]. */
+fun DrawScope.hand(icon: VectorIcon, x: Double, y: Double, s: Double) {
     if (s <= 0) return
-    translate((x + s * 0.04).toFloat(), (y + s * 0.05).toFloat()) {
-        with(painter) { draw(Size(s.toFloat(), s.toFloat()), alpha = 0.45f, colorFilter = ColorFilter.tint(Color.Black)) }
-    }
-    translate(x.toFloat(), y.toFloat()) {
-        with(painter) { draw(Size(s.toFloat(), s.toFloat()), colorFilter = ColorFilter.tint(Color.White)) }
+    icon(icon, x + s * 0.04, y + s * 0.05, s, Color.Black, 0.45f)
+    icon(icon, x, y, s, Color.White)
+}
+
+@Composable
+fun rememberHand(): VectorIcon = rememberVectorIcon(Icons.Filled.TouchApp)
+
+/**
+ * A vector icon's paths, drawn straight onto the canvas at any size. A VectorPainter caches one
+ * bitmap per size instead, so drawing it at several sizes in a frame re-renders that bitmap
+ * mid-frame and the icons flicker or come out cut off. (Material icons are flat paths; group
+ * transforms aren't applied.)
+ */
+class VectorIcon(vector: ImageVector) {
+    val width = vector.viewportWidth
+    val height = vector.viewportHeight
+    val paths: List<Path> = mutableListOf<Path>().also { collectPaths(vector.root, it) }
+
+    private fun collectPaths(group: VectorGroup, out: MutableList<Path>) {
+        for (node in group) when (node) {
+            is VectorPath -> out += node.pathData.toPath().apply { fillType = node.pathFillType }
+            is VectorGroup -> collectPaths(node, out)
+        }
     }
 }
 
 @Composable
-fun rememberHand(): VectorPainter = rememberVectorPainter(Icons.Filled.TouchApp)
+fun rememberVectorIcon(vector: ImageVector): VectorIcon = remember(vector) { VectorIcon(vector) }
 
 /** Draws any vector icon tinted, top-left at (x, y), square size s. */
-fun DrawScope.icon(painter: VectorPainter, x: Double, y: Double, s: Double, tint: Color) {
+fun DrawScope.icon(icon: VectorIcon, x: Double, y: Double, s: Double, tint: Color, alpha: Float = 1f) {
     if (s <= 0) return
-    translate(x.toFloat(), y.toFloat()) {
-        with(painter) { draw(Size(s.toFloat(), s.toFloat()), colorFilter = ColorFilter.tint(tint)) }
+    withTransform({ translate(x.toFloat(), y.toFloat()); scale(s.toFloat() / icon.width, s.toFloat() / icon.height, Offset.Zero) }) {
+        for (p in icon.paths) drawPath(p, tint, alpha)
+    }
+}
+
+/** An outline [width] wide around a vector icon's shapes (draw it under [icon] for an inked edge). */
+fun DrawScope.iconOutline(icon: VectorIcon, x: Double, y: Double, s: Double, color: Color, width: Double) {
+    if (s <= 0) return
+    val stroke = Stroke((2 * width * icon.width / s).toFloat(), join = StrokeJoin.Round)
+    withTransform({ translate(x.toFloat(), y.toFloat()); scale(s.toFloat() / icon.width, s.toFloat() / icon.height, Offset.Zero) }) {
+        for (p in icon.paths) drawPath(p, color, style = stroke)
     }
 }
 

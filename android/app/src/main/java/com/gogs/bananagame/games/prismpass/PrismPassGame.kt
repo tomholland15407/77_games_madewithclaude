@@ -232,8 +232,11 @@ private fun DrawScope.tower(world: PrismWorld) {
         val cx = BALL_X * w; val cy = sy(r.worldY)
         if (cy <= -world.ringRadius * h - 40 * u || cy >= h + world.ringRadius * h + 40 * u) continue
         val rot = world.t * r.speed * r.dir
+        // Butt-capped arcs meeting edge to edge leave an anti-aliased seam that shimmers as the ring
+        // turns; each arc runs ~2 px into the next (drawn over it), so no background shows through.
+        val overlap = 2 * u / (world.ringRadius * h)
         for (i in 0 until world.arcCount) {
-            val arc = Path(); arc.arc(cx, cy, world.ringRadius * h, rot + i * seg, rot + (i + 1) * seg, moveFirst = true)
+            val arc = Path(); arc.arc(cx, cy, world.ringRadius * h, rot + i * seg, rot + (i + 1) * seg + overlap, moveFirst = true)
             strokePath(arc, swatch(i), RING_THICK * 2 * h, StrokeCap.Butt)
         }
     }
