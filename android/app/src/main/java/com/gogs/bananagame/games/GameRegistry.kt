@@ -77,6 +77,7 @@ import com.gogs.bananagame.games.sniper.SniperGame
 import com.gogs.bananagame.games.rocknrocket.RockNRocketGame
 import com.gogs.bananagame.games.bananagetaway.BananaGetawayGame
 import com.gogs.bananagame.games.queens.QueensGame
+import com.gogs.bananagame.games.sunsetputt.SunsetPuttGame
 
 /** The master list of games shown in the feed, in the iOS `GameRegistry.all` order. */
 object GameRegistry {
@@ -158,6 +159,7 @@ object GameRegistry {
             TileTrioGame.definition,
             FruitTumbleGame.definition,
             LandingLinesGame.definition,
+            SunsetPuttGame.definition,
         )
     }
 }

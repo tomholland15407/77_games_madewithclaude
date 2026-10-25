@@ -13,6 +13,9 @@ import com.gogs.bananagame.games.queens.QueensGen
 import com.gogs.bananagame.games.queens.QueensPlay
 import com.gogs.bananagame.games.rocknrocket.RocketRace
 import com.gogs.bananagame.games.sniper.GROUND_V
+import com.gogs.bananagame.games.sunsetputt.DGGen
+import com.gogs.bananagame.games.sunsetputt.DGOutcome
+import com.gogs.bananagame.games.sunsetputt.DGPhysics
 import com.gogs.bananagame.games.sniper.SniperWorld
 import com.gogs.bananagame.games.sniper.TARGET_H
 import com.gogs.bananagame.games.cheerupmonkey.CMParams
@@ -234,6 +237,17 @@ class DeferredGamesTest {
                 assertEquals("one crown in region $k", 1, b.solution.withIndex().count { b.regions[it.index * n + it.value] == k })
             }
             if (QueensGen.grade(level) == 1) assertTrue(QueensGen.logicSolvable(n, b.regions, false))
+        }
+    }
+
+    @Test
+    fun sunsetPuttDemoShotDropsAndHolesHaveAHoleInOne() {
+        val h = DGGen.demoHole
+        // The iOS-tuned shot (20°, 0.57) still sinks with this physics.
+        assertEquals(DGOutcome.SUNK, DGPhysics.simulate(h, h.teeX, h.teeY + DGPhysics.R, 20.0 * Math.PI / 180, 0.57))
+        for (level in listOf(1, 4, 6)) {
+            val hole = DGGen.hole(DGGen.params(level))
+            assertTrue("level $level hole has a robust hole-in-one", DGGen.robustShot(hole, deterministic = true) != null)
         }
     }
 }
