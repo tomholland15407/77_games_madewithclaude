@@ -7,6 +7,7 @@ import com.gogs.bananagame.games.canyonplink.PlinkWorld
 import com.gogs.bananagame.games.canyonplink.RSGen
 import com.gogs.bananagame.games.canyonplink.RSParams
 import com.gogs.bananagame.games.cheerupmonkey.CMLoot
+import com.gogs.bananagame.games.rocknrocket.RocketRace
 import com.gogs.bananagame.games.sniper.GROUND_V
 import com.gogs.bananagame.games.sniper.SniperWorld
 import com.gogs.bananagame.games.sniper.TARGET_H
@@ -162,5 +163,24 @@ class DeferredGamesTest {
         wait(0.88); panTo(w.targets.first().x, gy); wait(0.22); w.fire()
         assertEquals(0, w.targets.size)
         assertFalse("the last shot is the real win()", w.playing)
+    }
+
+    @Test
+    fun rockNRocketDemoTakesTheFlagFirst() {
+        for (w in listOf(300.0, 330.0, 360.0, 390.0)) for (h in listOf(300.0, 330.0, 360.0)) {
+            val race = RocketRace(1)
+            race.areaW = w; race.areaH = h
+            race.demoSetup()
+            var frame = 0; var fired = false
+            val lastSteer = intArrayOf(-99)
+            while (race.playing && frame < 900) {
+                frame++
+                if (race.demoDrive(frame, lastSteer, fired)) fired = true
+                race.step(1.0 / 60)
+            }
+            assertTrue("fires at ${w}x$h", fired)
+            assertFalse("finishes at ${w}x$h", race.playing)
+            assertEquals("wins at ${w}x$h", RocketRace.LAPS, race.player!!.lap)
+        }
     }
 }
