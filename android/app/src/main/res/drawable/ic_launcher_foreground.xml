@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A bright, fresh banana on black (the iOS project ships an empty AppIcon set, so this is drawn from scratch). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:strokeColor="#E0A400"
+        android:strokeWidth="1"
+        android:pathData="M33,40 C30,62 44,78 66,77 C74,76.5 78,73 76,70 C58,72 44,62 41,42 C40.5,38 34,36.5 33,40 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="36" android:startY="40"
+                android:endX="60" android:endY="78">
+                <item android:offset="0" android:color="#FFFFF07A" />
+                <item android:offset="0.45" android:color="#FFFFDC28" />
+                <item android:offset="1" android:color="#FFF7BE08" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path
+        android:strokeColor="#99FFFFE6"
+        android:strokeWidth="1.6"
+        android:strokeLineCap="round"
+        android:pathData="M38,46 C41,60 50,68 63,70" />
+    <path
+        android:fillColor="#6B4A1E"
+        android:pathData="M33,40 L31,33 C31,31.5 34,31 35,32.5 L38,38.5 Z" />
+    <path
+        android:fillColor="#4A3415"
+        android:pathData="M74,69.5 C77,69 79,70.5 78,72.5 L76,73 Z" />
+</vector>
