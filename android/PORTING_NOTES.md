@@ -208,7 +208,9 @@ Fixed in the review:
   smaller than 393 × 852 dp the whole UI is scaled down (density × k, k = the smaller ratio, never
   below 0.5) so every game shows in its entirety; bigger phones keep their density. The system font
   scale is ignored for the same reason (game text is sized to the art). The manual's Dialog gets its
-  own density, so it's wrapped too.
+  own density, so it's wrapped too. On tablets, unfolded foldables and in landscape (a window more
+  than 1.3× wider than a phone of its height; Android 16+ ignores the portrait lock on large screens)
+  the app is a phone-shaped 393 × 852 column centred on black, scaled to the window's height.
 - Feed lock: iOS locks the pager while a `locksFeed` game plays. Here the pager stays scrollable:
   every `locksFeed` game's play area consumes its own drags (`touchDrag` / `pressDown`), so a swipe
   outside it (HUD, top and bottom margins) leaves the game mid-play. The skip button is kept.
