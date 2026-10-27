@@ -521,27 +521,28 @@ private fun SunsetPuttView(level: Int, onWin: () -> Unit, onFail: () -> Unit) {
             }
         }
         ver
-        Hud(golf, isDemo, ink)
+        // Plain values, not the mutable Golf: with strong skipping, Hud(golf) would never redraw.
+        Hud(golf.strokes, golf.budget, golf.course.size, golf.index,
+            if (golf.timeLimit > 0) golf.timeLeft / golf.timeLimit else 0.0, isDemo, ink)
     }
 }
 
 @Composable
-private fun Hud(golf: Golf, isDemo: Boolean, ink: Color) {
+private fun Hud(strokes: Int, budget: Int, holes: Int, index: Int, frac: Double, isDemo: Boolean, ink: Color) {
     Column(Modifier.fillMaxWidth().padding(top = if (isDemo) 4.dp else 10.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
         if (!isDemo) {
-            val frac = if (golf.timeLimit > 0) golf.timeLeft / golf.timeLimit else 0.0
             TimeBar(frac, Modifier.fillMaxWidth().padding(horizontal = 40.dp).height(5.dp),
                 fill = if (frac < 0.3) Color.Red else ink.op(0.7), track = ink.op(0.15))
         }
         Row(Modifier.fillMaxWidth().padding(horizontal = if (isDemo) 12.dp else 20.dp), verticalAlignment = Alignment.Top) {
             Row(horizontalArrangement = Arrangement.spacedBy(3.dp)) {
-                Text("${golf.strokes}", style = ts(if (isDemo) 34.0 else 54.0, FontWeight.ExtraBold, ink), modifier = Modifier.alignByBaseline())
-                Text("/${golf.budget}", style = ts(if (isDemo) 15.0 else 22.0, FontWeight.Bold, ink.op(0.6)), modifier = Modifier.alignByBaseline())
+                Text("$strokes", style = ts(if (isDemo) 34.0 else 54.0, FontWeight.ExtraBold, ink), modifier = Modifier.alignByBaseline())
+                Text("/$budget", style = ts(if (isDemo) 15.0 else 22.0, FontWeight.Bold, ink.op(0.6)), modifier = Modifier.alignByBaseline())
             }
             Spacer(Modifier.weight(1f))
             Row(Modifier.padding(top = if (isDemo) 10.dp else 16.dp), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-                for (i in 0 until max(golf.course.size, 1)) {
-                    Box(Modifier.size(if (isDemo) 8.dp else 10.dp).background(if (i < golf.index) ink.op(0.8) else ink.op(0.18), CircleShape))
+                for (i in 0 until max(holes, 1)) {
+                    Box(Modifier.size(if (isDemo) 8.dp else 10.dp).background(if (i < index) ink.op(0.8) else ink.op(0.18), CircleShape))
                 }
             }
         }
