@@ -149,7 +149,12 @@ class DeferredGamesTest {
             val b = RSGen.generate(p)
             assertEquals(p.targetCount, b.targets.toSet().size)
             for (t in b.targets) { assertFalse(b.walls[t.r][t.c]); assertTrue(t.r in 1 until 11) }
-            val aims = (0 until 360).map { i -> RSGen.shotCells(i / 360.0 * 2 * Math.PI, b.walls, p.maxBounces) }
+            // The generator's own aims (a can counts only if it also pops 0.3° either side): greedy cover
+            // isn't monotonic, so plain single-angle aims can come out a shot worse (~6% of L7 boards).
+            val aims = (0 until 360).map { i ->
+                val cells = listOf(-0.3, 0.0, 0.3).map { d -> RSGen.shotCells((i + d) / 360 * 2 * Math.PI, b.walls, p.maxBounces) }
+                BooleanArray(cells[0].size) { k -> cells.all { it[k] } }
+            }
             assertTrue("level $level must be clearable within ${p.bulletBudget}", RSGen.greedyShots(b.targets, aims) <= p.bulletBudget)
         }
     }
