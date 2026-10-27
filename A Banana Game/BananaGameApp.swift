@@ -31,7 +31,8 @@ struct BananaGameApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView()
+            // Phone-shaped on iPad too: a centred column (see PhoneColumn).
+            PhoneColumn { RootView() }
                 .environment(favorites)
                 .environment(sound)
                 .environment(settings)

@@ -110,8 +110,11 @@ struct GamePageView: View {
         // `gameArea`); closing it restarts the current level from its countdown.
         .fullScreenCover(isPresented: $showManual, onDismiss: restartLevel) {
             if let manual = game.manual {
-                GameManualView(game: game, manual: manual) {
-                    showManual = false
+                // A full-screen cover spans the whole window, so it gets its own phone column on iPad.
+                PhoneColumn {
+                    GameManualView(game: game, manual: manual) {
+                        showManual = false
+                    }
                 }
             }
         }

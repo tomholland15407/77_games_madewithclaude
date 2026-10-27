@@ -166,6 +166,10 @@ When adding a game, honor these so the feed feels consistent:
 - Full-bleed black, immersive: status bar is hidden. The feed is full-screen; each page
   insets its own content by the safe-area amounts passed from `FeedView` (never let the
   scroll view respect the safe area — it breaks one-game-per-screen paging).
+- **iPad = a phone column.** `PhoneColumn` (wrapping `RootView` and the manual's full-screen
+  cover) lays the app out in a centred column of the iPhone's aspect on black whenever the window
+  is much wider than a phone, so games never stretch to 4:3. Anything presented full screen needs
+  its own `PhoneColumn`.
 - **Top-center camera cutout is universal** (Dynamic Island / notch / hole-punch). Never
   place titles or key UI in the top-center strip. The page floors its top inset at 60pt
   (`max(topInset, 60)`) so content always clears the island, even full-bleed.
